@@ -1,0 +1,6 @@
+# This style is ensured to be loaded before the user specified style.
+
+# Define imports here that the user can override in his custom
+# style.
+import:
+    - common/map_items.yaml

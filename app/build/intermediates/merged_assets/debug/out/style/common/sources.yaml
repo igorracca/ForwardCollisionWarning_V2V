@@ -1,0 +1,22 @@
+sources:
+    omv:
+        type: MVT
+        url: https://vector.hereapi.com/v2/vectortiles/base/mc/{z}/{x}/{y}/omv
+
+    here-satellite:
+        type: Raster
+        url: https://1.aerial.maps.ls.hereapi.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/512/png8
+        min_display_zoom: 1
+        max_zoom: 19
+
+    here-traffic_flow:
+        type: MVT
+        url: https://traffic.vector.hereapi.com/v2/traffictiles/flow/mc/{z}/{x}/{y}/omv
+        # maximum supported zoom level of the traffic server
+        max_zoom: 17
+
+    here-traffic_incidents:
+        type: MVT
+        url: https://traffic.vector.hereapi.com/v2/traffictiles/incident/mc/{z}/{x}/{y}/omv
+        # maximum supported zoom level of the traffic server
+        max_zoom: 17

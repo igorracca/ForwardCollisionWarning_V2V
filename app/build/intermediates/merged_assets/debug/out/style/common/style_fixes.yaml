@@ -1,0 +1,16 @@
+# This file contains overrides of the original map styles from JSLA team,
+# that do not work on Mobile SDK
+
+global:
+
+    # IOTSDK-1552: dynamically selected color causes evaluation errors, so use black for now
+    road_shields:
+        text:
+            font:
+                fill: black
+
+styles:
+    # IOTSDK-2992: Set a blend order to ensure buildings are on top of polyline map items
+    # but below text labels.
+    buildings-style:
+        blend_order: 1

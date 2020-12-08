@@ -1,0 +1,155 @@
+textures:
+    traffic_incidents:
+        url: ../images/traffic_incidents.png
+        filtering: mipmap
+        density: 1
+        sprites:
+            # define sprites: [x origin, y origin, width, height]
+            tmc_blocking_accident: [0, 0, 60, 74]
+            tmc_blocking_closure: [60, 0, 60, 74]
+            tmc_blocking_congestion: [120, 0, 60, 74]
+            tmc_blocking_other: [0, 74, 60, 74]
+            tmc_blocking_roadworks: [60, 74, 60, 74]
+            tmc_high_accident: [120, 74, 60, 74]
+            tmc_high_congestion: [180, 0, 60, 74]
+            tmc_high_other: [180, 74, 60, 74]
+            tmc_high_roadworks: [0, 148, 60, 74]
+            tmc_veryhigh_accident: [60, 148, 60, 74]
+            tmc_veryhigh_congestion: [120, 148, 60, 74]
+            tmc_veryhigh_other: [180, 148, 60, 74]
+            tmc_veryhigh_roadworks: [240, 0, 60, 74]
+
+styles:
+    incidents:
+        base: points
+        blend: inlay
+        blend_order: 2
+        texture: traffic_incidents
+        draw:
+            collide: false
+            interactive: true
+            order: 451
+            placement: first_point
+            buffer: 8px
+            size: [[17, 20px], [18, 24px], [20, 32px]]
+            offset: [[17, [0px, -14px]], [18, [0px, -18px]], [20, [0px, -24px]]]
+
+layers:
+    traffic_incidents:
+        enabled: false # disabled by default, have to be enabled in parent style or at runtime
+        data: { source: here-traffic_incidents }
+        high_accident:
+            filter:
+                $zoom: { min: 10}
+                warning_level: [low, minor]
+                kind: accident
+            draw:
+                incidents:
+                    sprite: tmc_high_accident
+
+        high_congestion:
+            filter:
+                $zoom: { min: 10}
+                warning_level: [low, minor]
+                kind: congestion
+            draw:
+                incidents:
+                    sprite: tmc_high_congestion
+
+        high_roadworks:
+            filter:
+                $zoom: { min: 10}
+                warning_level: [low, minor]
+                kind: construction
+            draw:
+                incidents:
+                    sprite: tmc_high_roadworks
+
+        high_other:
+            filter:
+                $zoom: { min: 10}
+                warning_level: [low, minor]
+                kind: [disabled_vehicle, mass_transit, planned_event, road_hazard, weather, other]
+            draw:
+                incidents:
+                    sprite: tmc_high_other
+
+        veryhigh_accident:
+            filter:
+                $zoom: { min: 10}
+                warning_level: major
+                kind: accident
+            draw:
+                incidents:
+                    sprite: tmc_veryhigh_accident
+
+        veryhigh_congestion:
+            filter:
+                $zoom: { min: 10}
+                warning_level: major
+                kind: congestion
+            draw:
+                incidents:
+                    sprite: tmc_veryhigh_congestion
+
+        veryhigh_roadworks:
+            filter:
+                $zoom: { min: 10}
+                warning_level: major
+                kind: construction
+            draw:
+                incidents:
+                    sprite: tmc_veryhigh_roadworks
+
+        veryhigh_other:
+            filter:
+                $zoom: { min: 10}
+                warning_level: major
+                kind: [disabled_vehicle, mass_transit, planned_event, road_hazard, weather, other]
+            draw:
+                incidents:
+                    sprite: tmc_veryhigh_other
+
+        blocking_accident:
+            filter:
+                $zoom: { min: 10}
+                warning_level: critical
+                kind: accident
+            draw:
+                incidents:
+                    sprite: tmc_blocking_accident
+
+        blocking_congestion:
+            filter:
+                $zoom: { min: 10}
+                warning_level: critical
+                kind: congestion
+            draw:
+                incidents:
+                    sprite: tmc_blocking_congestion
+
+        blocking_roadworks:
+            filter:
+                $zoom: { min: 10}
+                warning_level: critical
+                kind: construction
+            draw:
+                incidents:
+                    sprite: tmc_blocking_roadworks
+
+        blocking_other:
+            filter:
+                $zoom: { min: 10}
+                warning_level: critical
+                kind: [disabled_vehicle, mass_transit, planned_event, road_hazard, weather, other]
+            draw:
+                incidents:
+                    sprite: tmc_blocking_other
+
+        blocking_closure:
+            filter:
+                $zoom: { min: 10}
+                kind: road_closure
+            draw:
+                incidents:
+                    sprite: tmc_blocking_closure

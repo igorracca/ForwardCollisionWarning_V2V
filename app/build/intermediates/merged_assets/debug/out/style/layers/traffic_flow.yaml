@@ -1,0 +1,116 @@
+# This follows Olympia traffic styling. Specified here: https://confluence.in.here.com/display/FMD/Traffic+Display
+
+global:
+    #traffic flow colour definitions (day)
+    traffic_normal: 'rgb (0,186,56)'
+    traffic_high: 'rgb (255,200,0)'
+    traffic_very_high: 'rgb (235,0,12)'
+    traffic_blocking: 'rgb (50,50,50)'
+    traffic_outline: 'rgb (110,110,110)'
+
+layers:
+    traffic_flow:
+        data: { source: here-traffic_flow }
+        draw:
+            lines:
+                order: 450
+                width: 2px
+                outline:
+                    width: 1px
+                    color: global.traffic_outline
+        enabled: false # disabled by default, have to be enabled in parent style or at runtime
+        los_unknown_traffic:
+            filter: { kind: unknown }
+            draw:
+                lines:
+                    order: 449
+                    color: '#ffff00'
+        #level of service / level of road traffic congestion
+        los_free_traffic:
+            filter: { kind: free }
+            draw:
+                lines:
+                    color: global.traffic_normal
+        los_minor_traffic:
+            filter: { kind: minor }
+            draw:
+                lines:
+                    order: 451
+                    color: global.traffic_high
+        los_slow_traffic:
+            filter: { kind: slow }
+            draw:
+                lines:
+                    order: 452
+                    color: global.traffic_high
+        los_queing_traffic:
+            filter: { kind: queuing }
+            draw:
+                lines:
+                    order: 453
+                    color: global.traffic_very_high
+        los_stationary_traffic:
+            filter: { kind: stationary }
+            draw:
+                lines:
+                    order: 454
+                    color: global.traffic_blocking
+        los_no_traffic:
+            filter: { kind: none }
+            draw:
+                lines:
+                    order: 455
+                    color: global.traffic_blocking
+
+        #functional road classes
+        frc_0: #category 0 etc.
+            filter:
+                frc: 0
+                $zoom: { min: 7}
+            draw:
+                lines:
+                    #color here now depends on los, so we cannot define a static.
+                    width: [[7, 2px], [17, 8px], [20, 17px]]
+
+        frc_1:
+            filter:
+                frc: 1
+                $zoom: { min: 10}
+            draw:
+                lines:
+                    #color here now depends on los, so we cannot define a static.
+                    width: [[10, 2px], [17, 6px], [20, 14px]]
+        frc_2:
+            filter:
+                frc: 2
+                $zoom: { min: 13}
+            draw:
+                lines:
+                    #color here now depends on los, so we cannot define a static.
+                    width: [[13, 2px], [20, 9px]]
+        frc_3:
+            filter:
+                frc: 3
+                $zoom: { min: 15}
+            draw:
+                lines:
+                    #color here now depends on los, so we cannot define a static.
+                    width: [[15, 2px], [20, 5px]]
+
+        frc_4:
+            filter:
+                frc: 4
+                $zoom: { min: 15}
+            draw:
+                lines:
+                    #color here now depends on los, so we cannot define a static.
+                    width: [[15, 2px], [20, 5px]]
+
+        frc_5:
+            filter:
+                frc: 5
+                $zoom: { min: 15}
+            draw:
+                lines:
+                    #color here now depends on los, so we cannot define a static.
+                    width: [[15, 2px], [20, 5px]]

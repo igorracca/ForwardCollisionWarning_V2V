@@ -1,0 +1,8 @@
+# This style is ensured to be loaded after the user specified style.
+# Tangram style merge rules apply.
+
+import:
+    - layers/traffic_incidents.yaml
+    - layers/traffic_flow.yaml
+    - common/sources.yaml
+    - common/style_fixes.yaml

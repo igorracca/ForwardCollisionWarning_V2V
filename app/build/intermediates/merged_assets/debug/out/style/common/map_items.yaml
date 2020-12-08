@@ -1,0 +1,27 @@
+# This file contains styles used for mapitems of all sorts.
+
+styles:
+    mapitem_polygons:
+        base: polygons
+        blend: inlay
+        blend_order: 2
+        high_precision: true
+        marker_special: true
+
+    mapitem_stroke_lines:
+        base: lines
+        blend: inlay
+        blend_order: 2
+        high_precision: true
+        marker_special: true
+
+    mapitem_polylines:
+        base: lines
+        blend: inlay
+        blend_order: 0
+        high_precision: true
+
+    mapitem_markers:
+        base: points
+        blend: overlay
+        blend_order: 3

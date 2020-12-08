@@ -1,0 +1,10 @@
+cameras:
+    isometric:
+        type: perspective
+
+layers:
+    satellite:
+        data: { source: here-satellite }
+        draw:
+            raster:
+                order: 0

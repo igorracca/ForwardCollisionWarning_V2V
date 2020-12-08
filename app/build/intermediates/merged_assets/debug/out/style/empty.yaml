@@ -1,0 +1,5 @@
+# This file is intentionally left blank. It is used in our
+# unit tests. MapScene.load_scene does not support loading
+# without a specified style file. This file allows us to
+# use empty scenes (except for injected, internal styles)
+# for testing.
