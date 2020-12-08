@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         mapMarkerExample.showVehicleMapMarkers();
     }
 
+//    public void centeredMapMarkersButtonClicked(View view) {
+//        mapMarkerExample.showCenteredMapMarkers();
+//    }
+
     public void clearMapButtonClicked(View view) {
         mapMarkerExample.clearMap();
     }

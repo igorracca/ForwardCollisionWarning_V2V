@@ -20,6 +20,9 @@ public class Vehicle {
         this.heading = heading;
     }
 
+    public Vehicle(GeoCoordinates geoCoordinates) {
+        this.geoCoordinates = geoCoordinates;
+    }
     public MapImage getMapImage() {
         return mapImage;
     }

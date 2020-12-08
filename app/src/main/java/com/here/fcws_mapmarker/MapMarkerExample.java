@@ -46,13 +46,13 @@ public class MapMarkerExample {
 
     private Context context;
     private MapViewLite mapView;
-    private final List<MapMarker> mapMarkerList = new ArrayList<>();
+    private final List<Vehicle> VehicleList = new ArrayList<>();
 
     public MapMarkerExample(Context context, MapViewLite mapView) {
         this.context = context;
         this.mapView = mapView;
         Camera camera = mapView.getCamera();
-        camera.setTarget(new GeoCoordinates(52.520798, 13.409408));
+        camera.setTarget(new GeoCoordinates(47.481457, 19.053375));
         camera.setZoomLevel(15);
 
         // Setting a tap handler to pick markers from map
@@ -62,22 +62,36 @@ public class MapMarkerExample {
     }
 
     public void showVehicleMapMarkers() {
-        for (int i = 0; i < 10; i++) {
-            GeoCoordinates geoCoordinates = createRandomLatLonInViewport();
 
+        Vehicle vehicle1 = new Vehicle(createRandomLatLonInViewport());
+        VehicleList.add(vehicle1);
+        Vehicle vehicle2 = new Vehicle(createRandomLatLonInViewport());
+        VehicleList.add(vehicle2);
+
+        for (Vehicle v : VehicleList) {
             // Centered on location. Shown below the POI image to indicate the location.
-            addCircleMapMarker(geoCoordinates);
+            addCircleMapMarker(v.getGeoCoordinates());
 
             // Anchored, pointing to location.
-            addPOIMapMarker(geoCoordinates);
+            addPOIMapMarker(v.getGeoCoordinates());
         }
     }
 
+//    public void showCenteredMapMarkers() {
+//        GeoCoordinates geoCoordinates = createRandomLatLonInViewport();
+//
+//        // Centered on location.
+//        addPhotoMapMarker(geoCoordinates);
+//
+//        // Centered on location. Shown on top of the previous image to indicate the location.
+//        addCircleMapMarker(geoCoordinates);
+//    }
+
     public void clearMap() {
-        for (MapMarker mapMarker : mapMarkerList) {
-            mapView.getMapScene().removeMapMarker(mapMarker);
+        for (Vehicle v : VehicleList) {
+            mapView.getMapScene().removeMapMarker(v.getMapMarker());
         }
-        mapMarkerList.clear();
+        VehicleList.clear();
     }
 
     private GeoCoordinates createRandomLatLonInViewport() {
@@ -158,8 +172,18 @@ public class MapMarkerExample {
         mapMarker.setMetadata(metadata);
 
         mapView.getMapScene().addMapMarker(mapMarker);
-        mapMarkerList.add(mapMarker);
+//        VehicleList.add(mapMarker);
     }
+
+//    private void addPhotoMapMarker(GeoCoordinates geoCoordinates) {
+//        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.here_car);
+//
+//        MapMarker mapMarker = new MapMarker(geoCoordinates);
+//        mapMarker.addImage(mapImage, new MapMarkerImageStyle());
+//
+//        mapView.getMapScene().addMapMarker(mapMarker);
+//        mapMarkerList.add(mapMarker);
+//    }
 
     private void addCircleMapMarker(GeoCoordinates geoCoordinates) {
         MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.circle);
@@ -168,7 +192,7 @@ public class MapMarkerExample {
         mapMarker.addImage(mapImage, new MapMarkerImageStyle());
 
         mapView.getMapScene().addMapMarker(mapMarker);
-        mapMarkerList.add(mapMarker);
+//        mapMarkerList.add(mapMarker);
     }
 
     private void showDialog(String title, String message) {
