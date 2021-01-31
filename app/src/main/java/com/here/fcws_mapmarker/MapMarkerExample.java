@@ -47,6 +47,7 @@ public class MapMarkerExample {
     private Context context;
     private MapViewLite mapView;
     private final List<Vehicle> VehicleList = new ArrayList<>();
+    private final List<MapMarker> mapMarkerList = new ArrayList<>();
 
     public MapMarkerExample(Context context, MapViewLite mapView) {
         this.context = context;
@@ -62,22 +63,45 @@ public class MapMarkerExample {
     }
 
     public void showVehicleMapMarkers() {
-
-        Vehicle vehicle1 = new Vehicle(createRandomLatLonInViewport());
+//        GeoCoordinates geoCoordinates = createRandomLatLonInViewport();
+        // 47.48162918672599, 19.0538202627025
+        GeoCoordinates geoCoordinates = new GeoCoordinates(47.48162918672599,19.0538202627025);
+        Vehicle vehicle1 = new Vehicle(geoCoordinates.latitude, geoCoordinates.longitude);
         VehicleList.add(vehicle1);
-        Vehicle vehicle2 = new Vehicle(createRandomLatLonInViewport());
+        // Centered on location. Shown below the POI image to indicate the location.
+        addCircleMapMarker(vehicle1, geoCoordinates);
+        // Anchored, pointing to location.
+        addPOIMapMarker(vehicle1, geoCoordinates);
+        //47.482800183105525, 19.052988777909846
+        GeoCoordinates geoCoordinates2 = new GeoCoordinates(47.482800183105525,19.052988777909846);
+//        GeoCoordinates geoCoordinates2 = createRandomLatLonInViewport();
+        Vehicle vehicle2 = new Vehicle(geoCoordinates2.latitude, geoCoordinates2.longitude);
         VehicleList.add(vehicle2);
-
-        for (Vehicle v : VehicleList) {
-            // Centered on location. Shown below the POI image to indicate the location.
-            addCircleMapMarker(v.getGeoCoordinates());
-
-            // Anchored, pointing to location.
-            addPOIMapMarker(v.getGeoCoordinates());
-        }
+        // Centered on location. Shown below the POI image to indicate the location.
+        addCircleMapMarker(vehicle2, geoCoordinates2);
+        // Anchored, pointing to location.
+        addPOIMapMarker(vehicle2, geoCoordinates2);
     }
 
-//    public void showCenteredMapMarkers() {
+    public void showCenteredMapMarkers() {
+        // 47.47749786251345, 19.0555073722648
+        GeoCoordinates geoCoordinates = new GeoCoordinates(47.47749786251345, 19.0555073722648);
+        Vehicle vehicle1 = new Vehicle(geoCoordinates.latitude, geoCoordinates.longitude);
+        VehicleList.add(vehicle1);
+        // Centered on location. Shown below the POI image to indicate the location.
+        addPhotoMapMarker(geoCoordinates);
+        // Anchored, pointing to location.
+        addCircleMapMarker(vehicle1, geoCoordinates);
+        // 47.47740359419673, 19.05409384806247
+        GeoCoordinates geoCoordinates2 = new GeoCoordinates(47.47740359419673, 19.05409384806247);
+//        GeoCoordinates geoCoordinates2 = createRandomLatLonInViewport();
+        Vehicle vehicle2 = new Vehicle(geoCoordinates2.latitude, geoCoordinates2.longitude);
+        VehicleList.add(vehicle2);
+        // Centered on location. Shown below the POI image to indicate the location.
+        addPhotoMapMarker(geoCoordinates2);
+        // Anchored, pointing to location.
+        addCircleMapMarker(vehicle2, geoCoordinates2);
+
 //        GeoCoordinates geoCoordinates = createRandomLatLonInViewport();
 //
 //        // Centered on location.
@@ -85,7 +109,7 @@ public class MapMarkerExample {
 //
 //        // Centered on location. Shown on top of the previous image to indicate the location.
 //        addCircleMapMarker(geoCoordinates);
-//    }
+    }
 
     public void clearMap() {
         for (Vehicle v : VehicleList) {
@@ -112,6 +136,15 @@ public class MapMarkerExample {
 
     private double getVehicleCoordinates(double min, double max) {
         return min + Math.random() * (max - min);
+    }
+
+    private Vehicle getVehicleByMapMarker(MapMarker mapMarker) {
+        for (Vehicle v : VehicleList) {
+            if(v.getMapMarker() == mapMarker) {
+                return v;
+            }
+        }
+        return null;
     }
 
     private void setTapGestureHandler() {
@@ -144,6 +177,11 @@ public class MapMarkerExample {
                     if (string != null) {
                         message = string;
                     }
+
+                    Vehicle v = getVehicleByMapMarker(topmostMapMarker);
+                    if(v != null) {
+                        showDialog("V not null", message);
+                    }
                     showDialog("Map Marker picked", message);
                     return;
                 }
@@ -151,14 +189,19 @@ public class MapMarkerExample {
                 showDialog("Map marker picked:", "Location: " +
                         topmostMapMarker.getCoordinates().latitude + ", " +
                         topmostMapMarker.getCoordinates().longitude);
+
+                GeoCoordinates geoCoordinates = new GeoCoordinates(57.47749786251345, 23.0555073722648);
+                topmostMapMarker.setCoordinates(geoCoordinates);
             }
         });
     }
 
-    private void addPOIMapMarker(GeoCoordinates geoCoordinates) {
+    private void addPOIMapMarker(Vehicle v, GeoCoordinates geoCoordinates) {
         MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.poi);
 
         MapMarker mapMarker = new MapMarker(geoCoordinates);
+        v.setLatitude(geoCoordinates.latitude);
+        v.setLongitude(geoCoordinates.longitude);
 
         // The bottom, middle position should point to the location.
         // By default, the anchor point is set to 0.5, 0.5.
@@ -171,28 +214,33 @@ public class MapMarkerExample {
         metadata.setString("key_poi", "This is a POI.");
         mapMarker.setMetadata(metadata);
 
+        v.setMapMarker(mapMarker);
         mapView.getMapScene().addMapMarker(mapMarker);
-//        VehicleList.add(mapMarker);
+        mapMarkerList.add(mapMarker);
     }
 
-//    private void addPhotoMapMarker(GeoCoordinates geoCoordinates) {
-//        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.here_car);
-//
-//        MapMarker mapMarker = new MapMarker(geoCoordinates);
-//        mapMarker.addImage(mapImage, new MapMarkerImageStyle());
-//
-//        mapView.getMapScene().addMapMarker(mapMarker);
-//        mapMarkerList.add(mapMarker);
-//    }
-
-    private void addCircleMapMarker(GeoCoordinates geoCoordinates) {
-        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.circle);
+    private void addPhotoMapMarker(GeoCoordinates geoCoordinates) {
+        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.here_car);
 
         MapMarker mapMarker = new MapMarker(geoCoordinates);
         mapMarker.addImage(mapImage, new MapMarkerImageStyle());
 
         mapView.getMapScene().addMapMarker(mapMarker);
-//        mapMarkerList.add(mapMarker);
+        mapMarkerList.add(mapMarker);
+    }
+
+    private void addCircleMapMarker(Vehicle v, GeoCoordinates geoCoordinates) {
+        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.circle);
+
+        MapMarker mapMarker = new MapMarker(geoCoordinates);
+        mapMarker.addImage(mapImage, new MapMarkerImageStyle());
+
+        v.setLatitude(geoCoordinates.latitude);
+        v.setLongitude(geoCoordinates.longitude);
+
+        v.setMapMarker(mapMarker);
+        mapView.getMapScene().addMapMarker(mapMarker);
+        mapMarkerList.add(mapMarker);
     }
 
     private void showDialog(String title, String message) {
