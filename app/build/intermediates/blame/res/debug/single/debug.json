@@ -4,6 +4,10 @@
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/layout_activity_server.xml.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/layout/activity_server.xml"
+    },
+    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },

@@ -39,6 +39,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.here.fcws_mapmarker.UDPServerSocketActivity"
+            android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->
         <provider
             android:name="com.here.sdk.engine.InitProvider"

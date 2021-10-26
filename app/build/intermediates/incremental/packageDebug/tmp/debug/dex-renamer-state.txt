@@ -1,4 +1,4 @@
-#Sun Jan 31 09:56:07 CET 2021
+#Tue Oct 26 21:45:48 CEST 2021
 base.0=/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

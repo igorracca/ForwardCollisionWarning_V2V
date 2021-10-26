@@ -19,6 +19,7 @@
 
 package com.here.fcws_mapmarker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -96,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         mapMarkerExample.clearMap();
     }
 
+    public void navigateToServer(View view) {
+        Intent intent = new Intent(this, UDPClientSocketActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -113,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mapView.onDestroy();
     }
+
 }

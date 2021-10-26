@@ -3,9 +3,11 @@ package com.here.fcws_mapmarker;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapviewlite.MapImage;
 import com.here.sdk.mapviewlite.MapMarker;
+import com.here.sdk.mapviewlite.MapMarkerImageStyle;
 
 public class Vehicle {
 
+    private int id;
     private double latitude;
     private double longitude;
     private int velocity;
@@ -16,27 +18,34 @@ public class Vehicle {
     public void updateCoordinates(GeoCoordinates geoCoordinates){
         this.latitude = geoCoordinates.latitude;
         this.longitude = geoCoordinates.longitude;
-        updateMapMarker(geoCoordinates);
-    }
-
-    private void updateMapMarker(GeoCoordinates geoCoordinates) {
         this.mapMarker.setCoordinates(geoCoordinates);
     }
 
-    public Vehicle(double latitude, double longitude, int velocity, int heading, MapImage mapImage, MapMarker mapMarker) {
+    public Vehicle(int id, double latitude, double longitude, int velocity, int heading, MapImage mapImage, MapMarker mapMarker) {
+        this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.velocity = velocity;
         this.heading = heading;
         this.mapImage = mapImage;
         this.mapMarker = mapMarker;
+        this.mapMarker.addImage(this.mapImage, new MapMarkerImageStyle());
     }
 
-    public Vehicle(double latitude, double longitude) {
+    public Vehicle(double latitude, double longitude, MapMarker mapMarker) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.velocity = velocity;
         this.heading = heading;
+        this.mapMarker = mapMarker;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getLatitude() {
