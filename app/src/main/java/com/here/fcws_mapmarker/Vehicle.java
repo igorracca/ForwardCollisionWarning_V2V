@@ -8,36 +8,20 @@ import com.here.sdk.mapviewlite.MapMarkerImageStyle;
 public class Vehicle {
 
     private int id;
-    private double latitude;
-    private double longitude;
     private int velocity;
     private int heading;
     private MapImage mapImage;
     private MapMarker mapMarker;
 
-    public void updateCoordinates(GeoCoordinates geoCoordinates){
-        this.latitude = geoCoordinates.latitude;
-        this.longitude = geoCoordinates.longitude;
-        this.mapMarker.setCoordinates(geoCoordinates);
-    }
-
-    public Vehicle(int id, double latitude, double longitude, int velocity, int heading, MapImage mapImage, MapMarker mapMarker) {
-        this.id = id;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.velocity = velocity;
-        this.heading = heading;
-        this.mapImage = mapImage;
-        this.mapMarker = mapMarker;
-        this.mapMarker.addImage(this.mapImage, new MapMarkerImageStyle());
-    }
-
     public Vehicle(double latitude, double longitude, MapMarker mapMarker) {
-        this.latitude = latitude;
-        this.longitude = longitude;
         this.velocity = velocity;
         this.heading = heading;
         this.mapMarker = mapMarker;
+    }
+
+    public void setCoordinates(double lat, double lon){
+        GeoCoordinates geoCoordinates = new GeoCoordinates(lat, lon);
+        this.mapMarker.setCoordinates(geoCoordinates);
     }
 
     public int getId() {
@@ -49,19 +33,11 @@ public class Vehicle {
     }
 
     public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+        return mapMarker.getCoordinates().latitude;
     }
 
     public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+        return mapMarker.getCoordinates().longitude;
     }
 
     public int getVelocity() {

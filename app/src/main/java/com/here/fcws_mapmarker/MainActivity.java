@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PermissionsRequestor permissionsRequestor;
     private MapViewLite mapView;
-    private MapMarkerExample mapMarkerExample;
+    private VehicleMapMarker vehicleMapMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLoadScene(@Nullable MapScene.ErrorCode errorCode) {
                 if (errorCode == null) {
-                    mapMarkerExample = new MapMarkerExample(MainActivity.this, mapView);
+                    vehicleMapMarker = new VehicleMapMarker(MainActivity.this, mapView);
                 } else {
                     Log.d(TAG, "onLoadScene failed: " + errorCode.toString());
                 }
@@ -86,19 +86,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void anchoredMapMarkersButtonClicked(View view) {
-        mapMarkerExample.showCenteredMapMarkers();
-    }
-
-    public void centeredMapMarkersButtonClicked(View view) {
-        mapMarkerExample.showCenteredMapMarkers();
+        vehicleMapMarker.showCenteredMapMarkers();
     }
 
     public void clearMapButtonClicked(View view) {
-        mapMarkerExample.clearMap();
+        vehicleMapMarker.clearMap();
     }
 
     public void navigateToServer(View view) {
-        Intent intent = new Intent(this, UDPClientSocketActivity.class);
+        Intent intent = new Intent(this, UDPServerActivity.class);
         startActivity(intent);
     }
 

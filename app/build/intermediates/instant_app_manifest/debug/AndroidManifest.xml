@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.here.fcws_mapmarker.UDPServerSocketActivity"
+            android:name="com.here.fcws_mapmarker.UDPServerActivity"
             android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -48,6 +48,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <service
+            android:name="com.here.fcws_mapmarker.UDPServerService"
+            android:exported="false" />
+
         <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->
         <provider
             android:name="com.here.sdk.engine.InitProvider"

@@ -18,7 +18,7 @@
 12-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:6:22-76
 13
 14    <application
-14-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:8:5-36:19
+14-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:8:5-40:19
 15        android:allowBackup="true"
 15-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:9:9-35
 16        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
@@ -69,8 +69,8 @@
 40        </activity>
 41        <activity
 41-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:9-35:20
-42            android:name="com.here.fcws_mapmarker.UDPServerSocketActivity"
-42-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-58
+42            android:name="com.here.fcws_mapmarker.UDPServerActivity"
+42-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-52
 43            android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
 43-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-55
 44
@@ -82,15 +82,23 @@
 48                android:value=".MainActivity" />
 48-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:34:17-46
 49        </activity>
-50        <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->
-51        <provider
-51-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:17:9-20:40
-52            android:name="com.here.sdk.engine.InitProvider"
-52-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:18:13-60
-53            android:authorities="com.here.fcws_mapmarker.com.here.sdk.engine.InitProvider"
-53-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:19:13-84
-54            android:exported="false" />
-54-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:20:13-37
-55    </application>
-56
-57</manifest>
+50
+51        <service
+51-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:9-38:44
+52            android:name="com.here.fcws_mapmarker.UDPServerService"
+52-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:18-50
+53            android:exported="false" />
+53-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:17-41
+54
+55        <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->
+56        <provider
+56-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:17:9-20:40
+57            android:name="com.here.sdk.engine.InitProvider"
+57-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:18:13-60
+58            android:authorities="com.here.fcws_mapmarker.com.here.sdk.engine.InitProvider"
+58-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:19:13-84
+59            android:exported="false" />
+59-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:20:13-37
+60    </application>
+61
+62</manifest>
