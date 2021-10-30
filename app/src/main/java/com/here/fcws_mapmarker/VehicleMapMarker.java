@@ -52,13 +52,8 @@ public class VehicleMapMarker {
     public VehicleMapMarker(Context context, MapViewLite mapView, List<Vehicle> vehicleList) {
         this.context = context;
         this.mapView = mapView;
-        if(vehicleList == null) {
-            Log.d("updateVehiclePosition", "vehicle list parameter is null");
-        } else {
-            Log.d("updateVehiclePosition", "vehicle list parameter is not null" + vehicleList);
-        }
-
         this.vehicleList = vehicleList;
+
         Camera camera = mapView.getCamera();
         camera.setTarget(new GeoCoordinates(47.481457, 19.053375));
         camera.setZoomLevel(15);
@@ -78,14 +73,9 @@ public class VehicleMapMarker {
         for(Vehicle v: vehicleList) {
             GeoCoordinates geoCoordinates = new GeoCoordinates(47.47749786251345, 19.0555073722648); // 47.47749786251345, 19.0555073722648
             // Centered on location. Shown below the POI image to indicate the location.
-            v.addCoordinates(geoCoordinates.latitude, geoCoordinates.longitude, addPhotoMapMarker(geoCoordinates));
+            v.setCoordinates(addPhotoMapMarker(geoCoordinates));
         }
-
 //        // 7.47740359419673, 19.05409384806247
-//        GeoCoordinates geoCoordinates2 = new GeoCoordinates(47.47740359419673, 19.05409384806247);
-//        // Centered on location. Shown below the POI image to indicate the location.
-//        Vehicle vehicle2 = new Vehicle(geoCoordinates2.latitude, geoCoordinates2.longitude, addPhotoMapMarker(geoCoordinates2));
-//        vehicleList.add(vehicle2);
     }
 
     public void clearMap() {
@@ -149,9 +139,6 @@ public class VehicleMapMarker {
                 showDialog("Vehicle picked:", "Location: " +
                         topmostMapMarker.getCoordinates().latitude + ", " +
                         topmostMapMarker.getCoordinates().longitude);
-
-//                GeoCoordinates geoCoordinates = new GeoCoordinates(topmostMapMarker.getCoordinates().latitude + 1, topmostMapMarker.getCoordinates().longitude + 1);
-//                topmostMapMarker.setCoordinates(geoCoordinates);
             }
         });
     }
@@ -168,14 +155,17 @@ public class VehicleMapMarker {
     }
 
     public static void updateVehiclePosition() {
-        Log.d("updateVehiclePosition", "vehicle list empty");
-        for(Vehicle v: vehicleList) {
-            if(v.hasCoordinates()) {
-                GeoCoordinates geo = new GeoCoordinates(v.getLatitude()+0.001, v.getLongitude()+0.0001);
-                v.getMapMarker().setCoordinates(geo);
-                Log.d("updateVehiclePosition", "vehicle " + v + ": lat " + v.getLatitude() + " lon:" + v.getLongitude());
-            } else {
-                Log.d("updateVehiclePosition", "vehicle does not have coordinates");
+        if(vehicleList.size() == 0) {
+            Log.d("updateVehiclePosition", "vehicle list empty");
+        } else {
+            for (Vehicle v : vehicleList) {
+                if (v.hasCoordinates()) {
+                    GeoCoordinates geo = new GeoCoordinates(v.getLatitude() + 0.001, v.getLongitude() + 0.0001);
+                    v.getMapMarker().setCoordinates(geo);
+                    Log.d("updateVehiclePosition", "vehicle " + v + ": lat " + v.getLatitude() + " lon:" + v.getLongitude());
+                } else {
+                    Log.d("updateVehiclePosition", "vehicle does not have coordinates");
+                }
             }
         }
     }
