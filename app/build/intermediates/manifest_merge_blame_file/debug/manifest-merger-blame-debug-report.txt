@@ -69,8 +69,8 @@
 40        </activity>
 41        <activity
 41-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:9-35:20
-42            android:name="com.here.fcws_mapmarker.UDPServerActivity"
-42-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-52
+42            android:name="com.here.fcws_mapmarker.MapViewActivity"
+42-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-50
 43            android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
 43-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-55
 44

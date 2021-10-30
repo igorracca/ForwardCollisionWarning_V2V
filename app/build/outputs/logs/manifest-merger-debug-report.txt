@@ -115,12 +115,12 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:25:17-77
 	android:name
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:25:27-74
-activity#com.here.fcws_mapmarker.UDPServerActivity
+activity#com.here.fcws_mapmarker.MapViewActivity
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:9-35:20
 	android:parentActivityName
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-55
 	android:name
-		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-52
+		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-50
 meta-data#android.support.PARENT_ACTIVITY
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:32:13-34:49
 	android:value

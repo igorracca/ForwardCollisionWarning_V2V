@@ -20,6 +20,7 @@
 package com.here.fcws_mapmarker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -45,12 +46,19 @@ public class VehicleMapMarker {
 
     private Context context;
     private MapViewLite mapView;
-    private static final List<Vehicle> vehicleList = new ArrayList<>();
+    private static List<Vehicle> vehicleList;
     private final List<MapMarker> mapMarkerList = new ArrayList<>();
 
-    public VehicleMapMarker(Context context, MapViewLite mapView) {
+    public VehicleMapMarker(Context context, MapViewLite mapView, List<Vehicle> vehicleList) {
         this.context = context;
         this.mapView = mapView;
+        if(vehicleList == null) {
+            Log.d("updateVehiclePosition", "vehicle list parameter is null");
+        } else {
+            Log.d("updateVehiclePosition", "vehicle list parameter is not null" + vehicleList);
+        }
+
+        this.vehicleList = vehicleList;
         Camera camera = mapView.getCamera();
         camera.setTarget(new GeoCoordinates(47.481457, 19.053375));
         camera.setZoomLevel(15);
@@ -59,22 +67,25 @@ public class VehicleMapMarker {
         setTapGestureHandler();
 
         Toast.makeText(context,"Start the server to get vehicles data.", Toast.LENGTH_LONG).show();
+        showCenteredMapMarkers();
+    }
+
+    public static List<Vehicle> getVehicleList() {
+        return vehicleList;
     }
 
     public void showCenteredMapMarkers() {
-        // 47.47749786251345, 19.0555073722648
-        GeoCoordinates geoCoordinates = new GeoCoordinates(47.47749786251345, 19.0555073722648);
-        // Centered on location. Shown below the POI image to indicate the location.
-        Vehicle vehicle1 = new Vehicle(geoCoordinates.latitude, geoCoordinates.longitude, addPhotoMapMarker(geoCoordinates));
-        vehicleList.add(vehicle1);
+        for(Vehicle v: vehicleList) {
+            GeoCoordinates geoCoordinates = new GeoCoordinates(47.47749786251345, 19.0555073722648); // 47.47749786251345, 19.0555073722648
+            // Centered on location. Shown below the POI image to indicate the location.
+            v.addCoordinates(geoCoordinates.latitude, geoCoordinates.longitude, addPhotoMapMarker(geoCoordinates));
+        }
 
-        // 7.47740359419673, 19.05409384806247
-        GeoCoordinates geoCoordinates2 = new GeoCoordinates(47.47740359419673, 19.05409384806247);
-        // Centered on location. Shown below the POI image to indicate the location.
-        Vehicle vehicle2 = new Vehicle(geoCoordinates2.latitude, geoCoordinates2.longitude, addPhotoMapMarker(geoCoordinates2));
-        vehicleList.add(vehicle2);
-
-        updateVehiclePosition(); //TODO
+//        // 7.47740359419673, 19.05409384806247
+//        GeoCoordinates geoCoordinates2 = new GeoCoordinates(47.47740359419673, 19.05409384806247);
+//        // Centered on location. Shown below the POI image to indicate the location.
+//        Vehicle vehicle2 = new Vehicle(geoCoordinates2.latitude, geoCoordinates2.longitude, addPhotoMapMarker(geoCoordinates2));
+//        vehicleList.add(vehicle2);
     }
 
     public void clearMap() {
@@ -157,10 +168,15 @@ public class VehicleMapMarker {
     }
 
     public static void updateVehiclePosition() {
-        Vehicle v = vehicleList.get(0);
-        for(int i=0; i<1000; i++) {
-            v.setCoordinates(v.getLatitude()+0.001, v.getLongitude()+0.0001);
-            Log.d("updateVehiclePosition", "vehicle " + v + ": lat " + v.getLatitude() + " lon:" + v.getLongitude());
+        Log.d("updateVehiclePosition", "vehicle list empty");
+        for(Vehicle v: vehicleList) {
+            if(v.hasCoordinates()) {
+                GeoCoordinates geo = new GeoCoordinates(v.getLatitude()+0.001, v.getLongitude()+0.0001);
+                v.getMapMarker().setCoordinates(geo);
+                Log.d("updateVehiclePosition", "vehicle " + v + ": lat " + v.getLatitude() + " lon:" + v.getLongitude());
+            } else {
+                Log.d("updateVehiclePosition", "vehicle does not have coordinates");
+            }
         }
     }
 

@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 public class UDPServerService extends IntentService {
 
-    private boolean server_aktiv = true;
+    private static boolean server_aktiv = true;
 
     public UDPServerService() {
         super("UDP Server Service");
@@ -41,6 +41,8 @@ public class UDPServerService extends IntentService {
         DatagramPacket dp = new DatagramPacket(lMsg, lMsg.length);
         DatagramSocket ds = null;
 
+        server_aktiv = true;
+
         try {
             ds = new DatagramSocket(portNumber);
 
@@ -53,13 +55,15 @@ public class UDPServerService extends IntentService {
 
                 Log.d("UDP Service", "packet length: " + Integer.toString(dp.getLength()));
                 Log.d("UDP Service", "packet data: " + rec_str);
-                //updateUI(rec_str);
+
                 b.putString("result", rec_str);
-                rr.send(DataReceiver.RESULT_CODE,b);
+
+                rr.send(DataReceiver.STATUS_RECEIVED,b);
             }
         } catch(IOException e){
             e.printStackTrace();
         } finally{
+            server_aktiv = false;
             if (ds != null) {
                 ds.close();
             }
@@ -72,4 +76,5 @@ public class UDPServerService extends IntentService {
         server_aktiv = false;
         Log.d("UDP Service", "UDP Server Service terminated.");
     }
+
 }

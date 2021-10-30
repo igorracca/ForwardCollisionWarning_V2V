@@ -19,101 +19,92 @@
 
 package com.here.fcws_mapmarker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.here.sdk.mapviewlite.MapScene;
-import com.here.sdk.mapviewlite.MapStyle;
-import com.here.sdk.mapviewlite.MapViewLite;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private Context context;
+    final Handler handler = new Handler();
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private int portNumber = 9001;
+    private static List<Vehicle> vehicleList = new ArrayList<>();
 
-    private PermissionsRequestor permissionsRequestor;
-    private MapViewLite mapView;
-    private VehicleMapMarker vehicleMapMarker;
+    private Button buttonStartReceiving;
+    private Button buttonStopReceiving;
+    private static TextView textViewDataFromClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.context = MainActivity.this;
         setContentView(R.layout.activity_main);
 
-        // Get a MapView instance from layout
-        mapView = findViewById(R.id.map_view);
-        mapView.onCreate(savedInstanceState);
+        buttonStartReceiving = (Button) findViewById(R.id.btn_start_receiving);
+        buttonStopReceiving = (Button) findViewById(R.id.btn_stop_receiving);
+        textViewDataFromClient = (TextView) findViewById(R.id.tv_data_from_server);
 
-        handleAndroidPermissions();
-    }
+        initVehicleList();
 
-    private void handleAndroidPermissions() {
-        permissionsRequestor = new PermissionsRequestor(this);
-        permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
+        Intent intent = new Intent(this, UDPServerService.class);
+        intent.putExtra("portNumber", portNumber);
 
+        ResultReceiver dataReceiver = new DataReceiver(handler);
+        intent.putExtra("receiver", dataReceiver);
+
+        buttonStartReceiving.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void permissionsGranted() {
-                loadMapScene();
+            public void onClick(View v) {
+                buttonStartReceiving.setEnabled(false);
+                buttonStopReceiving.setEnabled(true);
+                Toast.makeText(context, "Listening on port " + portNumber + "...", Toast.LENGTH_LONG).show();
+
+                Log.d("UDP", "Starting UDP Server Service...");
+                startService(intent);
             }
+        });
 
+        buttonStopReceiving.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void permissionsDenied() {
-                Log.e(TAG, "Permissions denied by user.");
+            public void onClick(View v) {
+                Log.d("UDP", "Stopping UDP Server Service...");
+                buttonStopReceiving.setEnabled(false);
+
+                stopService(intent);
+
+                buttonStartReceiving.setEnabled(true);
             }
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        permissionsRequestor.onRequestPermissionsResult(requestCode, grantResults);
+    public static TextView getTextViewDataFromClient() {
+        return textViewDataFromClient;
     }
 
-    private void loadMapScene() {
-        mapView.getMapScene().loadScene(MapStyle.NORMAL_DAY, new MapScene.LoadSceneCallback() {
-            @Override
-            public void onLoadScene(@Nullable MapScene.ErrorCode errorCode) {
-                if (errorCode == null) {
-                    vehicleMapMarker = new VehicleMapMarker(MainActivity.this, mapView);
-                } else {
-                    Log.d(TAG, "onLoadScene failed: " + errorCode.toString());
-                }
-            }
-        });
+    private void initVehicleList() {
+        vehicleList.add(new Vehicle());
     }
 
-    public void anchoredMapMarkersButtonClicked(View view) {
-        vehicleMapMarker.showCenteredMapMarkers();
+    public void clearTextViewButtonClicked(View v) {
+        textViewDataFromClient.setText("");
     }
 
-    public void clearMapButtonClicked(View view) {
-        vehicleMapMarker.clearMap();
-    }
+    public void navigateToMapView(View view) {
+        Intent intent = new Intent(this, MapViewActivity.class);
+        intent.putExtra("vehicleList", (Serializable) vehicleList);
 
-    public void navigateToServer(View view) {
-        Intent intent = new Intent(this, UDPServerActivity.class);
         startActivity(intent);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
 }

@@ -2,10 +2,13 @@ package com.here.fcws_mapmarker;
 
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapviewlite.MapImage;
+import com.here.sdk.mapviewlite.MapImageFactory;
 import com.here.sdk.mapviewlite.MapMarker;
 import com.here.sdk.mapviewlite.MapMarkerImageStyle;
 
-public class Vehicle {
+import java.io.Serializable;
+
+public class Vehicle implements Serializable {
 
     private int id;
     private int velocity;
@@ -13,15 +16,26 @@ public class Vehicle {
     private MapImage mapImage;
     private MapMarker mapMarker;
 
+    public Vehicle() {}
+
     public Vehicle(double latitude, double longitude, MapMarker mapMarker) {
         this.velocity = velocity;
         this.heading = heading;
         this.mapMarker = mapMarker;
     }
 
+    public boolean hasCoordinates() {
+        return getMapMarker() != null;
+    }
+
+    public void addCoordinates(double lat, double lon, MapMarker mapMarker){
+        GeoCoordinates geoCoordinates = new GeoCoordinates(lat, lon);
+        this.mapMarker = mapMarker;
+    }
+
     public void setCoordinates(double lat, double lon){
         GeoCoordinates geoCoordinates = new GeoCoordinates(lat, lon);
-        this.mapMarker.setCoordinates(geoCoordinates);
+        this.mapMarker = mapMarker;
     }
 
     public int getId() {
@@ -44,31 +58,16 @@ public class Vehicle {
         return velocity;
     }
 
-    public void setVelocity(int velocity) {
-        this.velocity = velocity;
-    }
-
     public int getHeading() {
         return heading;
-    }
-
-    public void setHeading(int heading) {
-        this.heading = heading;
     }
 
     public MapImage getMapImage() {
         return mapImage;
     }
 
-    public void setMapImage(MapImage mapImage) {
-        this.mapImage = mapImage;
-    }
-
     public MapMarker getMapMarker() {
         return mapMarker;
     }
 
-    public void setMapMarker(MapMarker mapMarker) {
-        this.mapMarker = mapMarker;
-    }
 }

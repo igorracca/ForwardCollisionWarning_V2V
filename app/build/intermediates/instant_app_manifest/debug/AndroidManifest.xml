@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.here.fcws_mapmarker.UDPServerActivity"
+            android:name="com.here.fcws_mapmarker.MapViewActivity"
             android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
