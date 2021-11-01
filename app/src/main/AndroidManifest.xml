@@ -17,7 +17,7 @@
         <meta-data android:name="com.here.sdk.access_key_id" android:value="qOTZWp430-3xXpEtQFs06w"/>
         <meta-data android:name="com.here.sdk.access_key_secret" android:value="zY86FfGzT0VxCodlkqswG_9hb9ZOmAPctxpC4ttJOG6DQhAERFCzDtdiPNrqErn0cYde7kpB3dGDtln-ei4gxw"/>
 
-        <activity android:name="com.here.fcws_mapmarker.MainActivity">
+        <activity android:name="com.here.fcws_mapmarker.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -26,15 +26,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MapViewActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".activities.MapViewActivity"
+            android:parentActivityName=".activities.MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
-        <service android:name=".UDPServerService"
+        <service android:name=".service.UDPServerService"
                 android:exported="false" />
 
     </application>
