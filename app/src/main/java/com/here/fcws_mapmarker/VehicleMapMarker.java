@@ -26,6 +26,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.here.fcws_mapmarker.model.Vehicle;
+import com.here.fcws_mapmarker.model.VehicleParameters;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Metadata;
 import com.here.sdk.core.Point2D;
@@ -153,13 +154,14 @@ public class VehicleMapMarker {
         return mapMarker;
     }
 
-    public static void updateVehiclePosition() {
+    public static void updateVehicleAttributes(VehicleParameters vp) {
         if(vehicleList.size() == 0) {
             Log.d("updateVehiclePosition", "vehicle list empty");
         } else {
             for (Vehicle v : vehicleList) {
                 if (v.hasCoordinates()) {
-                    GeoCoordinates geo = new GeoCoordinates(v.getLatitude() + 0.001, v.getLongitude() + 0.0001);
+                    v.updateParameters(vp);
+                    GeoCoordinates geo = new GeoCoordinates(vp.lat, vp.lon);
                     v.getMapMarker().setCoordinates(geo);
                     Log.d("updateVehiclePosition", "vehicle lat: " + v.getLatitude() + " lon:" + v.getLongitude());
                 } else {

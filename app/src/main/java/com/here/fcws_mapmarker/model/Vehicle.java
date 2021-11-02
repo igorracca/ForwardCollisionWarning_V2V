@@ -16,12 +16,6 @@ public class Vehicle implements Serializable {
 
     public Vehicle() {}
 
-//    public Vehicle(double lat, double lon, double heading, double speed) {
-//        this.mapMarker = new Map
-//        setLat
-//
-//    }
-
     public boolean hasCoordinates() {
         return getMapMarker() != null;
     }
@@ -41,6 +35,11 @@ public class Vehicle implements Serializable {
     public void setSpeed(double speed) {
         this.speed = speed;
         this.speed_conv = speed * 3.6; // m/s to km/h
+    }
+
+    public void updateParameters(VehicleParameters vp) {
+        setHeading(vp.heading);
+        setSpeed(vp.speed);
     }
 
     // default Getters and Setters

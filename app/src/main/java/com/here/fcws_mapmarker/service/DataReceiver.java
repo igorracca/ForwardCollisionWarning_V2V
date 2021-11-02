@@ -10,6 +10,7 @@ import android.util.Log;
 import com.here.fcws_mapmarker.VehicleMapMarker;
 import com.here.fcws_mapmarker.activities.MainActivity;
 import com.here.fcws_mapmarker.model.Vehicle;
+import com.here.fcws_mapmarker.model.VehicleParameters;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,12 +45,12 @@ public class DataReceiver extends ResultReceiver {
                         Instant instant = date.toInstant();
                         String s = MainActivity.getTextViewDataFromClient().getText().toString();
                         if (data_rec.trim().length() != 0) {
-                            MainActivity.getTextViewDataFromClient().setText(s + "\n" + instant + " From Client : " + data_rec);
+                            MainActivity.getTextViewDataFromClient().setText(s + "\nAt " + instant + " from Client: " + data_rec);
                         }
                     }
                 });
 
-                readJSON(data_rec);
+                VehicleParameters vp = parseJSON(data_rec);
 
                 Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + data_rec);
                 handler.post(new Runnable() {
@@ -57,7 +58,7 @@ public class DataReceiver extends ResultReceiver {
                     @Override
                     public void run() {
                         if(VehicleMapMarker.getVehicleList() != null) {
-                            VehicleMapMarker.updateVehiclePosition();
+                            VehicleMapMarker.updateVehicleAttributes(vp);
                         }
                     }
                 });
@@ -66,7 +67,8 @@ public class DataReceiver extends ResultReceiver {
         }
     }
 
-    public void readJSON (String adr_data) {
+    public VehicleParameters parseJSON (String adr_data) {
+        VehicleParameters vp = null;
         try {
             JSONObject jObject = new JSONObject(adr_data);
 
@@ -77,8 +79,6 @@ public class DataReceiver extends ResultReceiver {
             Log.d("readJSON", "msg read: " + adrclass + " " + ts + " " + time);
 
             if(jObject.getJSONObject("HV") != null) {
-                Vehicle v = new Vehicle();
-
                 double lat = jObject.getJSONObject("HV").getDouble("Lat");
                 double lon = jObject.getJSONObject("HV").getDouble("Lon");
                 double elev = jObject.getJSONObject("HV").getDouble("Elev");
@@ -86,11 +86,11 @@ public class DataReceiver extends ResultReceiver {
                 double speed = jObject.getJSONObject("HV").getDouble("Speed");
 
                 Log.d("readJSON", "HV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
+
+                vp = new VehicleParameters(lat, lon, elev, heading, speed);
             } else {
                 Log.d("readJSON", " HV not found");
             }
-
-
 //            if(jObject.getJSONArray("RV") != null) {
 //                JSONArray jArray = jObject.getJSONArray("RV");
 //                        Log.d("jArray: ", jArray.toString());
@@ -105,9 +105,11 @@ public class DataReceiver extends ResultReceiver {
 //                Log.d("readJSON", " RV not found");
 //            }
 
+
         } catch (JSONException e) {
             Log.d("readJSON", " Exception: " + e.getMessage());
             e.printStackTrace();
         }
+        return vp;
     }
 }
