@@ -30,7 +30,7 @@
             android:name="com.here.sdk.access_key_secret"
             android:value="zY86FfGzT0VxCodlkqswG_9hb9ZOmAPctxpC4ttJOG6DQhAERFCzDtdiPNrqErn0cYde7kpB3dGDtln-ei4gxw" />
 
-        <activity android:name="com.here.fcws_mapmarker.MainActivity" >
+        <activity android:name="com.here.fcws_mapmarker.activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -39,17 +39,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.here.fcws_mapmarker.MapViewActivity"
-            android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
+            android:name="com.here.fcws_mapmarker.activities.MapViewActivity"
+            android:parentActivityName="com.here.fcws_mapmarker.activities.MainActivity" >
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
         <service
-            android:name="com.here.fcws_mapmarker.UDPServerService"
+            android:name="com.here.fcws_mapmarker.service.UDPServerService"
             android:exported="false" />
 
         <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->

@@ -9,6 +9,10 @@ import android.util.Log;
 
 import com.here.fcws_mapmarker.VehicleMapMarker;
 import com.here.fcws_mapmarker.activities.MainActivity;
+import com.here.fcws_mapmarker.model.Vehicle;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.time.Instant;
 import java.util.Date;
@@ -29,9 +33,9 @@ public class DataReceiver extends ResultReceiver {
 
         if(resultCode == STATUS_RECEIVED) {
             if(resultData != null) {
-                String msg = resultData.getString("result");
+                String data_rec = resultData.getString("data_rec");
 
-                Log.d("Data Receiver", "CODE_UPDATE_SERVER_UI: " + msg);
+                Log.d("Data Receiver", "CODE_UPDATE_SERVER_UI: " + data_rec);
                 handler.post(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -39,13 +43,15 @@ public class DataReceiver extends ResultReceiver {
                         Date date = new Date();
                         Instant instant = date.toInstant();
                         String s = MainActivity.getTextViewDataFromClient().getText().toString();
-                        if (msg.trim().length() != 0) {
-                            MainActivity.getTextViewDataFromClient().setText(s + "\n" + instant + " From Client : " + msg);
+                        if (data_rec.trim().length() != 0) {
+                            MainActivity.getTextViewDataFromClient().setText(s + "\n" + instant + " From Client : " + data_rec);
                         }
                     }
                 });
 
-                Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + msg);
+                readJSON(data_rec);
+
+                Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + data_rec);
                 handler.post(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -57,6 +63,51 @@ public class DataReceiver extends ResultReceiver {
                 });
 
             }
+        }
+    }
+
+    public void readJSON (String adr_data) {
+        try {
+            JSONObject jObject = new JSONObject(adr_data);
+
+            String adrclass = (String) jObject.getString("class");
+            String ts = String.valueOf(jObject.getInt("Timestamp"));
+            String time = (String) jObject.get("Time");
+
+            Log.d("readJSON", "msg read: " + adrclass + " " + ts + " " + time);
+
+            if(jObject.getJSONObject("HV") != null) {
+                Vehicle v = new Vehicle();
+
+                double lat = jObject.getJSONObject("HV").getDouble("Lat");
+                double lon = jObject.getJSONObject("HV").getDouble("Lon");
+                double elev = jObject.getJSONObject("HV").getDouble("Elev");
+                double heading = jObject.getJSONObject("HV").getDouble("Heading");
+                double speed = jObject.getJSONObject("HV").getDouble("Speed");
+
+                Log.d("readJSON", "HV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
+            } else {
+                Log.d("readJSON", " HV not found");
+            }
+
+
+//            if(jObject.getJSONArray("RV") != null) {
+//                JSONArray jArray = jObject.getJSONArray("RV");
+//                        Log.d("jArray: ", jArray.toString());
+////                double lat = jObject.getJSONArray("RV") .getDouble("Lat");
+////                double lon = jObject.getJSONObject("RV").getDouble("Lon");
+////                double elev = jObject.getJSONObject("RV").getDouble("Elev");
+////                double heading = jObject.getJSONObject("RV").getDouble("Heading");
+////                double speed = jObject.getJSONObject("RV").getDouble("Speed");
+////
+////                Log.d("readJSON", "RV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
+//            } else {
+//                Log.d("readJSON", " RV not found");
+//            }
+
+        } catch (JSONException e) {
+            Log.d("readJSON", " Exception: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -97,10 +97,10 @@ ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/Android
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:18:66-168
 	android:name
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:18:20-65
-activity#com.here.fcws_mapmarker.MainActivity
+activity#com.here.fcws_mapmarker.activities.MainActivity
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:20:9-27:20
 	android:name
-		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:20:19-70
+		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:20:19-81
 intent-filter#action:name:android.intent.action.MAIN+action:name:android.intent.action.VIEW+category:name:android.intent.category.LAUNCHER
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:21:13-26:29
 action#android.intent.action.MAIN
@@ -115,24 +115,24 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:25:17-77
 	android:name
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:25:27-74
-activity#com.here.fcws_mapmarker.MapViewActivity
+activity#com.here.fcws_mapmarker.activities.MapViewActivity
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:9-35:20
 	android:parentActivityName
-		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-55
+		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-66
 	android:name
-		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-50
+		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-61
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:32:13-34:49
+ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:32:13-34:60
 	android:value
-		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:34:17-46
+		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:34:17-57
 	android:name
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:33:17-63
-service#com.here.fcws_mapmarker.UDPServerService
+service#com.here.fcws_mapmarker.service.UDPServerService
 ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:9-38:44
 	android:exported
 		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:17-41
 	android:name
-		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:18-50
+		ADDED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:18-58
 uses-sdk
 INJECTED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml

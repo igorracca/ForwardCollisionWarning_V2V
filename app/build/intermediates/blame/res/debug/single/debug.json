@@ -1,15 +1,7 @@
 [
     {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-hdpi/ic_launcher.png"
-    },
-    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-nodpi_here_car.png.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-nodpi/here_car.png"
     },
     {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
@@ -24,6 +16,38 @@
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/layout_activity_map_view.xml.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/layout/activity_map_view.xml"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-nodpi_hv.png.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-nodpi/hv.png"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-nodpi_circle.png.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-nodpi/circle.png"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
     },
@@ -36,28 +60,12 @@
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-hdpi/poi.png"
     },
     {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/layout_activity_map_view.xml.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/layout/activity_map_view.xml"
-    },
-    {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
-    },
-    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable/ic_launcher_background.xml"
-    },
-    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-nodpi_circle.png.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-nodpi/circle.png"
     },
     {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
@@ -68,16 +76,12 @@
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-mdpi_poi.png.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-mdpi/poi.png"
     },
     {
-        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-nodpi_rv.png.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/drawable-nodpi/rv.png"
     },
     {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/drawable-xhdpi_poi.png.flat",

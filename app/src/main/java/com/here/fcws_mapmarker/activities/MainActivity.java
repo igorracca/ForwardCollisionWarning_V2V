@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     final Handler handler = new Handler();
 
-    private int portNumber = 9001;
+    private int portNumber = 15000;
     private static List<Vehicle> vehicleList = new ArrayList<>();
 
     private Button buttonStartReceiving;
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         buttonStartReceiving = (Button) findViewById(R.id.btn_start_receiving);
         buttonStopReceiving = (Button) findViewById(R.id.btn_stop_receiving);
         textViewDataFromClient = (TextView) findViewById(R.id.tv_data_from_server);
+
+        Toast.makeText(context,"Start the server to receive vehicles data.", Toast.LENGTH_LONG).show();
 
         initVehicleList();
 

@@ -629,7 +629,7 @@ int drawable abc_textfield_search_default_mtrl_alpha 0x7f060052
 int drawable abc_textfield_search_material 0x7f060053
 int drawable abc_vector_test 0x7f060054
 int drawable circle 0x7f060055
-int drawable here_car 0x7f060056
+int drawable hv 0x7f060056
 int drawable ic_launcher_background 0x7f060057
 int drawable ic_launcher_foreground 0x7f060058
 int drawable notification_action_background 0x7f060059
@@ -645,8 +645,9 @@ int drawable notification_template_icon_low_bg 0x7f060062
 int drawable notification_tile_bg 0x7f060063
 int drawable notify_panel_notification_icon_bg 0x7f060064
 int drawable poi 0x7f060065
-int drawable tooltip_frame_dark 0x7f060066
-int drawable tooltip_frame_light 0x7f060067
+int drawable rv 0x7f060066
+int drawable tooltip_frame_dark 0x7f060067
+int drawable tooltip_frame_light 0x7f060068
 int id ALT 0x7f070000
 int id CTRL 0x7f070001
 int id FUNCTION 0x7f070002

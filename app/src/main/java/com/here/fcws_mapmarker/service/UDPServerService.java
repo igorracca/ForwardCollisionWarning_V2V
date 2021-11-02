@@ -7,9 +7,17 @@ import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.here.fcws_mapmarker.model.Vehicle;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Iterator;
+import java.util.Map;
 
 public class UDPServerService extends IntentService {
 
@@ -33,7 +41,7 @@ public class UDPServerService extends IntentService {
         ResultReceiver rr = intent.getParcelableExtra("receiver");
         Bundle b = new Bundle();
 
-        byte[] lMsg = new byte[1024];
+        byte[] lMsg = new byte[2048];
         DatagramPacket dp = new DatagramPacket(lMsg, lMsg.length);
         DatagramSocket ds = null;
 
@@ -52,7 +60,7 @@ public class UDPServerService extends IntentService {
                 Log.d("UDP Service", "packet length: " + Integer.toString(dp.getLength()));
                 Log.d("UDP Service", "packet data: " + rec_str);
 
-                b.putString("result", rec_str);
+                b.putString("data_rec", rec_str);
 
                 rr.send(DataReceiver.STATUS_RECEIVED,b);
             }

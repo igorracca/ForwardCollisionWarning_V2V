@@ -50,9 +50,9 @@
 31            android:value="zY86FfGzT0VxCodlkqswG_9hb9ZOmAPctxpC4ttJOG6DQhAERFCzDtdiPNrqErn0cYde7kpB3dGDtln-ei4gxw" />
 31-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:18:66-168
 32
-33        <activity android:name="com.here.fcws_mapmarker.MainActivity" >
+33        <activity android:name="com.here.fcws_mapmarker.activities.MainActivity" >
 33-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:20:9-27:20
-33-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:20:19-70
+33-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:20:19-81
 34            <intent-filter>
 34-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:21:13-26:29
 35                <action android:name="android.intent.action.MAIN" />
@@ -69,24 +69,24 @@
 40        </activity>
 41        <activity
 41-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:9-35:20
-42            android:name="com.here.fcws_mapmarker.MapViewActivity"
-42-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-50
-43            android:parentActivityName="com.here.fcws_mapmarker.MainActivity" >
-43-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-55
+42            android:name="com.here.fcws_mapmarker.activities.MapViewActivity"
+42-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:29:19-61
+43            android:parentActivityName="com.here.fcws_mapmarker.activities.MainActivity" >
+43-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:30:13-66
 44
 45            <!-- The meta-data tag is required if you support API level 15 and lower -->
 46            <meta-data
-46-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:32:13-34:49
+46-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:32:13-34:60
 47                android:name="android.support.PARENT_ACTIVITY"
 47-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:33:17-63
-48                android:value=".MainActivity" />
-48-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:34:17-46
+48                android:value=".activities.MainActivity" />
+48-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:34:17-57
 49        </activity>
 50
 51        <service
 51-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:9-38:44
-52            android:name="com.here.fcws_mapmarker.UDPServerService"
-52-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:18-50
+52            android:name="com.here.fcws_mapmarker.service.UDPServerService"
+52-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:37:18-58
 53            android:exported="false" />
 53-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:17-41
 54

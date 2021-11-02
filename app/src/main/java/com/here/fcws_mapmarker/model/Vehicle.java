@@ -16,6 +16,12 @@ public class Vehicle implements Serializable {
 
     public Vehicle() {}
 
+//    public Vehicle(double lat, double lon, double heading, double speed) {
+//        this.mapMarker = new Map
+//        setLat
+//
+//    }
+
     public boolean hasCoordinates() {
         return getMapMarker() != null;
     }

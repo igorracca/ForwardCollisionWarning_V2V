@@ -61,7 +61,6 @@ public class VehicleMapMarker {
         // Setting a tap handler to pick markers from map
         setTapGestureHandler();
 
-        Toast.makeText(context,"Start the server to get vehicles data.", Toast.LENGTH_LONG).show();
         showCenteredMapMarkers();
     }
 
@@ -144,7 +143,7 @@ public class VehicleMapMarker {
     }
 
     private MapMarker addPhotoMapMarker(GeoCoordinates geoCoordinates) {
-        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.here_car);
+        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.hv);
 
         MapMarker mapMarker = new MapMarker(geoCoordinates);
         mapMarker.addImage(mapImage, new MapMarkerImageStyle());
@@ -162,7 +161,7 @@ public class VehicleMapMarker {
                 if (v.hasCoordinates()) {
                     GeoCoordinates geo = new GeoCoordinates(v.getLatitude() + 0.001, v.getLongitude() + 0.0001);
                     v.getMapMarker().setCoordinates(geo);
-                    Log.d("updateVehiclePosition", "vehicle " + v + ": lat " + v.getLatitude() + " lon:" + v.getLongitude());
+                    Log.d("updateVehiclePosition", "vehicle lat: " + v.getLatitude() + " lon:" + v.getLongitude());
                 } else {
                     Log.d("updateVehiclePosition", "vehicle does not have coordinates");
                 }
