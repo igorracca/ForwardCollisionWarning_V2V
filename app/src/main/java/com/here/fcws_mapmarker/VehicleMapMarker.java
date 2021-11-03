@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.here.fcws_mapmarker.model.Vehicle;
 import com.here.fcws_mapmarker.model.VehicleParameters;
+import com.here.sdk.core.Anchor2D;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Metadata;
 import com.here.sdk.core.Point2D;
@@ -48,11 +49,12 @@ public class VehicleMapMarker {
     private Context context;
     private MapViewLite mapView;
     private static List<Vehicle> vehicleList;
-    private static List<MapMarker> mapMarkerList = new ArrayList<>();
 
     Camera camera = null;
 
     public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
+    static MapImage mapImageHV = MapImageFactory.fromResource(App.getRes(), R.drawable.hv);
+    static MapImage mapImageRV = MapImageFactory.fromResource(App.getRes(), R.drawable.rv);
 
     public VehicleMapMarker(Context context, MapViewLite mapView, List<Vehicle> vehicleList) {
         this.context = context;
@@ -159,11 +161,20 @@ public class VehicleMapMarker {
         MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.hv);
 
         MapMarker mapMarker = new MapMarker(geoCoordinates);
-        mapMarker.addImage(mapImage, new MapMarkerImageStyle());
+        MapMarkerImageStyle imgStyle = new MapMarkerImageStyle();
+        imgStyle.setAnchorPoint(new Anchor2D(0.5F, 1));
+        mapMarker.addImage(mapImage, imgStyle);
         mapView.getMapScene().addMapMarker(mapMarker);
-        mapMarkerList.add(mapMarker);
 
         return mapMarker;
+    }
+
+    private static void updatePhotoMapMarker(Vehicle v) {
+        MapMarker mapMarker = v.getMapMarker();
+
+        MapMarkerImageStyle imgStyle = new MapMarkerImageStyle();
+        imgStyle.setAngle((float) v.getHeading() + 270);
+        mapMarker.updateImageStyle(imgStyle);
     }
 
     public static void updateVehicleAttributes(VehicleParameters vp) {
@@ -172,9 +183,14 @@ public class VehicleMapMarker {
         } else {
             for (Vehicle v : vehicleList) {
                 if (v.hasCoordinates()) {
+                    // set vehicle parameters
                     v.updateParameters(vp);
                     GeoCoordinates geo = new GeoCoordinates(vp.lat, vp.lon);
+                    // and update vehicle in the map
                     v.getMapMarker().setCoordinates(geo);
+                    // update heading of the vehicle in the map
+                    updatePhotoMapMarker(v);
+
                     if(DEBUG) Log.d("updateVehiclePosition", "vehicle lat: " + v.getLatitude() + " lon:" + v.getLongitude());
                 } else {
                     if(DEBUG) Log.d("updateVehiclePosition", "vehicle does not have coordinates");
