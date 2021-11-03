@@ -84,5 +84,4 @@ public class Vehicle implements Serializable {
         this.mapImage = mapImage;
     }
 
-
 }

@@ -50,14 +50,16 @@ public class VehicleMapMarker {
     private static List<Vehicle> vehicleList;
     private final List<MapMarker> mapMarkerList = new ArrayList<>();
 
+    public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
+
     public VehicleMapMarker(Context context, MapViewLite mapView, List<Vehicle> vehicleList) {
         this.context = context;
         this.mapView = mapView;
         this.vehicleList = vehicleList;
 
         Camera camera = mapView.getCamera();
-        camera.setTarget(new GeoCoordinates(47.481457, 19.053375));
-        camera.setZoomLevel(15);
+        camera.setTarget(new GeoCoordinates(48.22, 16.42));
+        camera.setZoomLevel(12);
 
         // Setting a tap handler to pick markers from map
         setTapGestureHandler();
@@ -119,10 +121,10 @@ public class VehicleMapMarker {
 
                 Vehicle v = getVehicleByMapMarker(topmostMapMarker);
                 if(v == null) {
-                    Log.d("MapMarker Activity", "V is null");
+                    if(DEBUG) Log.d("MapMarker Activity", "V is null");
                     return;
                 }
-                Log.d("MapMarker Activity", "V not null");
+                if(DEBUG) Log.d("MapMarker Activity", "V not null");
 
                 Metadata metadata = topmostMapMarker.getMetadata();
                 if (metadata != null) {
@@ -133,7 +135,7 @@ public class VehicleMapMarker {
                     }
                 }
 
-                Log.d("MapMarker Activity", "Location: " +
+                if(DEBUG) Log.d("MapMarker Activity", "Location: " +
                         topmostMapMarker.getCoordinates().latitude + ", " +
                         topmostMapMarker.getCoordinates().longitude);
                 showDialog("Vehicle picked:", "Location: " +
@@ -156,16 +158,16 @@ public class VehicleMapMarker {
 
     public static void updateVehicleAttributes(VehicleParameters vp) {
         if(vehicleList.size() == 0) {
-            Log.d("updateVehiclePosition", "vehicle list empty");
+            if(DEBUG) Log.d("updateVehiclePosition", "vehicle list empty");
         } else {
             for (Vehicle v : vehicleList) {
                 if (v.hasCoordinates()) {
                     v.updateParameters(vp);
                     GeoCoordinates geo = new GeoCoordinates(vp.lat, vp.lon);
                     v.getMapMarker().setCoordinates(geo);
-                    Log.d("updateVehiclePosition", "vehicle lat: " + v.getLatitude() + " lon:" + v.getLongitude());
+                    if(DEBUG) Log.d("updateVehiclePosition", "vehicle lat: " + v.getLatitude() + " lon:" + v.getLongitude());
                 } else {
-                    Log.d("updateVehiclePosition", "vehicle does not have coordinates");
+                    if(DEBUG) Log.d("updateVehiclePosition", "vehicle does not have coordinates");
                 }
             }
         }

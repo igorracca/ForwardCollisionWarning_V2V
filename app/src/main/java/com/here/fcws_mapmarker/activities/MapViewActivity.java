@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.here.fcws_mapmarker.App;
 import com.here.fcws_mapmarker.PermissionsRequestor;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.VehicleMapMarker;
@@ -27,6 +28,8 @@ public class MapViewActivity extends AppCompatActivity {
     private MapViewLite mapView;
     private static List<Vehicle> vehicleList;
     private static VehicleMapMarker vehicleMapMarker;
+
+    public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,7 @@ public class MapViewActivity extends AppCompatActivity {
                 if (errorCode == null) {
                     vehicleMapMarker = new VehicleMapMarker(MapViewActivity.this, mapView, vehicleList);
                 } else {
-                    Log.d(TAG, "onLoadScene failed: " + errorCode.toString());
+                    if(DEBUG) Log.d(TAG, "onLoadScene failed: " + errorCode.toString());
                 }
             }
         });

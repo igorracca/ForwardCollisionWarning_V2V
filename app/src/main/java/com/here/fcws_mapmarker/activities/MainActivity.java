@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.here.fcws_mapmarker.App;
 import com.here.fcws_mapmarker.service.DataReceiver;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.service.UDPServerService;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonStartReceiving;
     private Button buttonStopReceiving;
     private static TextView textViewDataFromClient;
+
+    public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 buttonStopReceiving.setEnabled(true);
                 Toast.makeText(context, "Listening on port " + portNumber + "...", Toast.LENGTH_LONG).show();
 
-                Log.d("UDP", "Starting UDP Server Service...");
+                if(DEBUG) Log.d("UDP", "Starting UDP Server Service...");
                 startService(intent);
             }
         });
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         buttonStopReceiving.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("UDP", "Stopping UDP Server Service...");
+                if(DEBUG) Log.d("UDP", "Stopping UDP Server Service...");
                 buttonStopReceiving.setEnabled(false);
 
                 stopService(intent);

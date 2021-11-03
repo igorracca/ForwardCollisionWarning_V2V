@@ -7,6 +7,8 @@ import android.os.ResultReceiver;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.here.fcws_mapmarker.App;
+import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.VehicleMapMarker;
 import com.here.fcws_mapmarker.activities.MainActivity;
 import com.here.fcws_mapmarker.model.Vehicle;
@@ -24,6 +26,8 @@ public class DataReceiver extends ResultReceiver {
     public static final int STATUS_FAILED = 0;
     Handler handler;
 
+    public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
+
     public DataReceiver(Handler handler) {
         super(handler);
         this.handler = handler;
@@ -36,7 +40,7 @@ public class DataReceiver extends ResultReceiver {
             if(resultData != null) {
                 String data_rec = resultData.getString("data_rec");
 
-                Log.d("Data Receiver", "CODE_UPDATE_SERVER_UI: " + data_rec);
+                if(DEBUG) Log.d("Data Receiver", "CODE_UPDATE_SERVER_UI: " + data_rec);
                 handler.post(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -52,7 +56,7 @@ public class DataReceiver extends ResultReceiver {
 
                 VehicleParameters vp = parseJSON(data_rec);
 
-                Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + data_rec);
+                if(DEBUG) Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + data_rec);
                 handler.post(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -62,7 +66,6 @@ public class DataReceiver extends ResultReceiver {
                         }
                     }
                 });
-
             }
         }
     }
@@ -76,7 +79,7 @@ public class DataReceiver extends ResultReceiver {
             String ts = String.valueOf(jObject.getInt("Timestamp"));
             String time = (String) jObject.get("Time");
 
-            Log.d("readJSON", "msg read: " + adrclass + " " + ts + " " + time);
+            if(DEBUG) Log.d("readJSON", "msg read: " + adrclass + " " + ts + " " + time);
 
             if(jObject.getJSONObject("HV") != null) {
                 double lat = jObject.getJSONObject("HV").getDouble("Lat");
@@ -85,29 +88,28 @@ public class DataReceiver extends ResultReceiver {
                 double heading = jObject.getJSONObject("HV").getDouble("Heading");
                 double speed = jObject.getJSONObject("HV").getDouble("Speed");
 
-                Log.d("readJSON", "HV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
+                if(DEBUG) Log.d("readJSON", "HV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
 
                 vp = new VehicleParameters(lat, lon, elev, heading, speed);
             } else {
-                Log.d("readJSON", " HV not found");
+                if(DEBUG) Log.d("readJSON", " HV not found");
             }
 //            if(jObject.getJSONArray("RV") != null) {
 //                JSONArray jArray = jObject.getJSONArray("RV");
-//                        Log.d("jArray: ", jArray.toString());
+//                        if(DEBUG) Log.d("jArray: ", jArray.toString());
 ////                double lat = jObject.getJSONArray("RV") .getDouble("Lat");
 ////                double lon = jObject.getJSONObject("RV").getDouble("Lon");
 ////                double elev = jObject.getJSONObject("RV").getDouble("Elev");
 ////                double heading = jObject.getJSONObject("RV").getDouble("Heading");
 ////                double speed = jObject.getJSONObject("RV").getDouble("Speed");
 ////
-////                Log.d("readJSON", "RV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
+////                if(DEBUG) Log.d("readJSON", "RV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
 //            } else {
-//                Log.d("readJSON", " RV not found");
+//                if(DEBUG) Log.d("readJSON", " RV not found");
 //            }
 
-
         } catch (JSONException e) {
-            Log.d("readJSON", " Exception: " + e.getMessage());
+            if(DEBUG) Log.d("readJSON", " Exception: " + e.getMessage());
             e.printStackTrace();
         }
         return vp;

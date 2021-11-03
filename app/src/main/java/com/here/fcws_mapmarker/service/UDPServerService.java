@@ -2,11 +2,14 @@ package com.here.fcws_mapmarker.service;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.here.fcws_mapmarker.App;
+import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.model.Vehicle;
 
 import org.json.JSONArray;
@@ -22,6 +25,7 @@ import java.util.Map;
 public class UDPServerService extends IntentService {
 
     private static boolean server_aktiv = true;
+    public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
     public UDPServerService() {
         super("UDP Server Service");
@@ -30,18 +34,18 @@ public class UDPServerService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("UDP", "UDP Server Service started.");
+        if (DEBUG) Log.d("UDP", "UDP Server Service started.");
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         int portNumber = intent.getIntExtra("portNumber", 0);
-        Log.d("UDP Service", "Listening on port " + portNumber + "...");
+        if (DEBUG) Log.d("UDP Service", "Listening on port " + portNumber + "...");
 
         ResultReceiver rr = intent.getParcelableExtra("receiver");
         Bundle b = new Bundle();
 
-        byte[] lMsg = new byte[2048];
+        byte[] lMsg = new byte[1024];
         DatagramPacket dp = new DatagramPacket(lMsg, lMsg.length);
         DatagramSocket ds = null;
 
@@ -49,22 +53,23 @@ public class UDPServerService extends IntentService {
 
         try {
             ds = new DatagramSocket(portNumber);
-
+            ds.setReceiveBufferSize(1);
             while (server_aktiv) {
                 ds.receive(dp);
 
-                Log.d("UDP Service", "S: Receiving...listening on port " + dp.getPort());
+                if (DEBUG) Log.d("UDP Service", "S: Receiving...listening on port " + dp.getPort());
                 String rec_str;
                 rec_str = new String(dp.getData());
 
-                Log.d("UDP Service", "packet length: " + Integer.toString(dp.getLength()));
-                Log.d("UDP Service", "packet data: " + rec_str);
+                if (DEBUG) Log.d("UDP Service", "packet length: " + Integer.toString(dp.getLength()));
+                if (DEBUG) Log.d("UDP Service", "packet data: " + rec_str);
 
                 b.putString("data_rec", rec_str);
 
                 rr.send(DataReceiver.STATUS_RECEIVED,b);
+                Thread.sleep(300);
             }
-        } catch(IOException e){
+        } catch(IOException | InterruptedException e){
             e.printStackTrace();
         } finally{
             server_aktiv = false;
@@ -78,7 +83,7 @@ public class UDPServerService extends IntentService {
     public void onDestroy() {
         super.onDestroy();
         server_aktiv = false;
-        Log.d("UDP Service", "UDP Server Service terminated.");
+        if (DEBUG) Log.d("UDP Service", "UDP Server Service terminated.");
     }
 
 }
