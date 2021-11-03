@@ -80,8 +80,8 @@ public class MapViewActivity extends AppCompatActivity {
         });
     }
 
-    public void anchoredMapMarkersButtonClicked(View view) {
-        vehicleMapMarker.showCenteredMapMarkers();
+    public void centerMapViewButtonClicked(View view) {
+        vehicleMapMarker.centerMapView();
     }
 
     public void clearMapButtonClicked(View view) {

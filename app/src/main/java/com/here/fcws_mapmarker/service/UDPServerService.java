@@ -50,10 +50,9 @@ public class UDPServerService extends IntentService {
         DatagramSocket ds = null;
 
         server_aktiv = true;
-
         try {
             ds = new DatagramSocket(portNumber);
-            ds.setReceiveBufferSize(1);
+//            ds.setReceiveBufferSize(1);
             while (server_aktiv) {
                 ds.receive(dp);
 
@@ -67,9 +66,8 @@ public class UDPServerService extends IntentService {
                 b.putString("data_rec", rec_str);
 
                 rr.send(DataReceiver.STATUS_RECEIVED,b);
-                Thread.sleep(300);
             }
-        } catch(IOException | InterruptedException e){
+        } catch(IOException e){
             e.printStackTrace();
         } finally{
             server_aktiv = false;
@@ -85,5 +83,4 @@ public class UDPServerService extends IntentService {
         server_aktiv = false;
         if (DEBUG) Log.d("UDP Service", "UDP Server Service terminated.");
     }
-
 }

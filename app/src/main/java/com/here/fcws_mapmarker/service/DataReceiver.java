@@ -25,6 +25,7 @@ public class DataReceiver extends ResultReceiver {
     public static final int STATUS_RECEIVED = 1;
     public static final int STATUS_FAILED = 0;
     Handler handler;
+    VehicleParameters vp = null;
 
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
@@ -49,12 +50,19 @@ public class DataReceiver extends ResultReceiver {
                         Instant instant = date.toInstant();
                         String s = MainActivity.getTextViewDataFromClient().getText().toString();
                         if (data_rec.trim().length() != 0) {
-                            MainActivity.getTextViewDataFromClient().setText(s + "\nAt " + instant + " from Client: " + data_rec);
+                            // update textView with the message received
+                            MainActivity.getTextViewDataFromClient().setText("\nAt " + instant + " from Client: " + data_rec + s + "\n");
+                            MainActivity.textView_msgCounter++;
+                            // clear text view if it reaches the limit defined at MainActivity
+                            if(MainActivity.textView_msgCounter >= MainActivity.textView_msgLimit) {
+                                MainActivity.getTextViewDataFromClient().setText("");
+                                MainActivity.textView_msgCounter = 0;
+                            }
                         }
                     }
                 });
 
-                VehicleParameters vp = parseJSON(data_rec);
+                vp = parseJSON(data_rec);
 
                 if(DEBUG) Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + data_rec);
                 handler.post(new Runnable() {

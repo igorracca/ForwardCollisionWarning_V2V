@@ -682,9 +682,9 @@ int id barrier 0x7f07001e
 int id beginning 0x7f07001f
 int id blocking 0x7f070020
 int id bottom 0x7f070021
-int id btn_start_receiving 0x7f070022
-int id btn_stop_receiving 0x7f070023
-int id buttonClear 0x7f070024
+int id btn_clear 0x7f070022
+int id btn_start_receiving 0x7f070023
+int id btn_stop_receiving 0x7f070024
 int id buttonPanel 0x7f070025
 int id center 0x7f070026
 int id center_horizontal 0x7f070027

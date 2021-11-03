@@ -683,9 +683,9 @@ id barrier
 id beginning
 id blocking
 id bottom
+id btn_clear
 id btn_start_receiving
 id btn_stop_receiving
-id buttonClear
 id buttonPanel
 id center
 id center_horizontal

@@ -50,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonStartReceiving;
     private Button buttonStopReceiving;
+    private Button buttonClear;
     private static TextView textViewDataFromClient;
 
+    public static int textView_msgCounter = 0;
+    public static final int textView_msgLimit = 30;
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
     @Override
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         buttonStartReceiving = (Button) findViewById(R.id.btn_start_receiving);
         buttonStopReceiving = (Button) findViewById(R.id.btn_stop_receiving);
         textViewDataFromClient = (TextView) findViewById(R.id.tv_data_from_server);
+        buttonClear = (Button) findViewById(R.id.btn_clear);
+
+        buttonClear.setEnabled(false);
 
         Toast.makeText(context,"Start the server to receive vehicles data.", Toast.LENGTH_LONG).show();
 
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 buttonStartReceiving.setEnabled(false);
                 buttonStopReceiving.setEnabled(true);
+                buttonClear.setEnabled(true);
                 Toast.makeText(context, "Listening on port " + portNumber + "...", Toast.LENGTH_LONG).show();
 
                 if(DEBUG) Log.d("UDP", "Starting UDP Server Service...");

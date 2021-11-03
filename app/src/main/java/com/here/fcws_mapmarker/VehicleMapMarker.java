@@ -48,7 +48,9 @@ public class VehicleMapMarker {
     private Context context;
     private MapViewLite mapView;
     private static List<Vehicle> vehicleList;
-    private final List<MapMarker> mapMarkerList = new ArrayList<>();
+    private static List<MapMarker> mapMarkerList = new ArrayList<>();
+
+    Camera camera = null;
 
     public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
@@ -57,9 +59,9 @@ public class VehicleMapMarker {
         this.mapView = mapView;
         this.vehicleList = vehicleList;
 
-        Camera camera = mapView.getCamera();
-        camera.setTarget(new GeoCoordinates(48.22, 16.42));
-        camera.setZoomLevel(12);
+        this.camera = mapView.getCamera();
+        this.camera.setTarget(new GeoCoordinates(48.22, 16.42));
+        this.camera.setZoomLevel(12);
 
         // Setting a tap handler to pick markers from map
         setTapGestureHandler();
@@ -77,7 +79,15 @@ public class VehicleMapMarker {
             // Centered on location. Shown below the POI image to indicate the location.
             v.setCoordinates(addPhotoMapMarker(geoCoordinates));
         }
-//        // 7.47740359419673, 19.05409384806247
+    }
+
+    public void centerMapView() {
+        Vehicle v = vehicleList.get(0);
+        if(v != null) {
+            this.camera = mapView.getCamera();
+            this.camera.setTarget(new GeoCoordinates(v.getLatitude(), v.getLongitude()));
+            this.camera.setZoomLevel(16);
+        }
     }
 
     public void clearMap() {
