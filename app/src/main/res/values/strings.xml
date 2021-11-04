@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">V2V HMI</string>
-    <string name="debug_mode">false</string>
+    <string name="debug_mode">true</string>
 </resources>

@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.here.fcws_mapmarker.App;
+import com.here.fcws_mapmarker.model.HV;
+import com.here.fcws_mapmarker.model.RV;
 import com.here.fcws_mapmarker.service.DataReceiver;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.service.UDPServerService;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int portNumber = 15000;
     private static List<Vehicle> vehicleList = new ArrayList<>();
+    private int numOfRV = 2;
 
     private Button buttonStartReceiving;
     private Button buttonStopReceiving;
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, UDPServerService.class);
         intent.putExtra("portNumber", portNumber);
-
+        intent.putExtra("numOfRV", numOfRV);
         ResultReceiver dataReceiver = new DataReceiver(handler);
         intent.putExtra("receiver", dataReceiver);
 
@@ -111,7 +114,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initVehicleList() {
-        vehicleList.add(new Vehicle());
+        vehicleList.add(new HV());
+        for(int i=1; i<=numOfRV; i++) {
+            vehicleList.add(new RV());
+        }
     }
 
     public void clearTextViewButtonClicked(View v) {

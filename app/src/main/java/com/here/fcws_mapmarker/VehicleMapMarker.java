@@ -23,14 +23,16 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.here.fcws_mapmarker.model.HV;
+import com.here.fcws_mapmarker.model.RV;
 import com.here.fcws_mapmarker.model.Vehicle;
-import com.here.fcws_mapmarker.model.VehicleParameters;
+import com.here.fcws_mapmarker.model.VehiclesParameters;
 import com.here.sdk.core.Anchor2D;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Metadata;
 import com.here.sdk.core.Point2D;
+import com.here.sdk.gestures.GestureType;
 import com.here.sdk.gestures.TapListener;
 import com.here.sdk.mapviewlite.Camera;
 import com.here.sdk.mapviewlite.MapImage;
@@ -41,7 +43,6 @@ import com.here.sdk.mapviewlite.MapViewLite;
 import com.here.sdk.mapviewlite.PickMapItemsCallback;
 import com.here.sdk.mapviewlite.PickMapItemsResult;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleMapMarker {
@@ -53,8 +54,6 @@ public class VehicleMapMarker {
     Camera camera = null;
 
     public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
-    static MapImage mapImageHV = MapImageFactory.fromResource(App.getRes(), R.drawable.hv);
-    static MapImage mapImageRV = MapImageFactory.fromResource(App.getRes(), R.drawable.rv);
 
     public VehicleMapMarker(Context context, MapViewLite mapView, List<Vehicle> vehicleList) {
         this.context = context;
@@ -64,9 +63,11 @@ public class VehicleMapMarker {
         this.camera = mapView.getCamera();
         this.camera.setTarget(new GeoCoordinates(48.22, 16.42));
         this.camera.setZoomLevel(12);
-
         // Setting a tap handler to pick markers from map
         setTapGestureHandler();
+
+        // disabling pinch rotate gesture
+        this.mapView.getGestures().disableDefaultAction(GestureType.PINCH_ROTATE);
 
         showCenteredMapMarkers();
     }
@@ -77,9 +78,9 @@ public class VehicleMapMarker {
 
     public void showCenteredMapMarkers() {
         for(Vehicle v: vehicleList) {
-            GeoCoordinates geoCoordinates = new GeoCoordinates(47.47749786251345, 19.0555073722648); // 47.47749786251345, 19.0555073722648
+            GeoCoordinates geoCoordinates = new GeoCoordinates(0, 0); // 47.47749786251345, 19.0555073722648
             // Centered on location. Shown below the POI image to indicate the location.
-            v.setCoordinates(addPhotoMapMarker(geoCoordinates));
+            v.setCoordinates(addPhotoMapMarker(v, geoCoordinates));
         }
     }
 
@@ -157,15 +158,21 @@ public class VehicleMapMarker {
         });
     }
 
-    private MapMarker addPhotoMapMarker(GeoCoordinates geoCoordinates) {
-        MapImage mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.hv);
+    private MapMarker addPhotoMapMarker(Vehicle v, GeoCoordinates geo) {
+        MapMarker mapMarker = new MapMarker(geo);
+        MapImage mapImage = null;
 
-        MapMarker mapMarker = new MapMarker(geoCoordinates);
-        MapMarkerImageStyle imgStyle = new MapMarkerImageStyle();
-        imgStyle.setAnchorPoint(new Anchor2D(0.5F, 1));
-        mapMarker.addImage(mapImage, imgStyle);
-        mapView.getMapScene().addMapMarker(mapMarker);
+        if(v != null) {
+            if(v.getClass() == HV.class) {
+                mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.hv);
+            } else
+            if( v.getClass() == RV.class) {
+                mapImage = MapImageFactory.fromResource(context.getResources(), R.drawable.rv);
+            }
 
+            mapMarker.addImage(mapImage, new MapMarkerImageStyle());
+            mapView.getMapScene().addMapMarker(mapMarker);
+        }
         return mapMarker;
     }
 
@@ -173,29 +180,43 @@ public class VehicleMapMarker {
         MapMarker mapMarker = v.getMapMarker();
 
         MapMarkerImageStyle imgStyle = new MapMarkerImageStyle();
-        imgStyle.setAngle((float) v.getHeading() + 270);
+        imgStyle.setAngle((float) v.getHeading() + 270); // map default orientation
         mapMarker.updateImageStyle(imgStyle);
     }
 
-    public static void updateVehicleAttributes(VehicleParameters vp) {
+    public static void updateVehicleAttributes(VehiclesParameters vp) {
         if(vehicleList.size() == 0) {
             if(DEBUG) Log.d("updateVehiclePosition", "vehicle list empty");
         } else {
-            for (Vehicle v : vehicleList) {
-                if (v.hasCoordinates()) {
-                    // set vehicle parameters
-                    v.updateParameters(vp);
-                    GeoCoordinates geo = new GeoCoordinates(vp.lat, vp.lon);
-                    // and update vehicle in the map
-                    v.getMapMarker().setCoordinates(geo);
-                    // update heading of the vehicle in the map
-                    updatePhotoMapMarker(v);
-
-                    if(DEBUG) Log.d("updateVehiclePosition", "vehicle lat: " + v.getLatitude() + " lon:" + v.getLongitude());
-                } else {
-                    if(DEBUG) Log.d("updateVehiclePosition", "vehicle does not have coordinates");
-                }
+            // UPDATE HV
+            Vehicle hv = vehicleList.get(0);
+            if (hv.hasCoordinates()) {
+                // set vehicle parameters
+                hv.updateParameters(vp);
+                GeoCoordinates HV_geo = new GeoCoordinates(vp.HV_Lat, vp.HV_Lon);
+                // and update vehicle in the map
+                hv.getMapMarker().setCoordinates(HV_geo);
+                // update heading of the vehicle in the map
+                updatePhotoMapMarker(hv);
+            }else {
+                if(DEBUG) Log.d("updateVehiclePosition", "HV does not have coordinates");
             }
+            if(DEBUG) Log.d("updateVehiclePosition", "HV updated. lat: " + hv.getLatitude() + " lon:" + hv.getLongitude() + " heading:" + hv.getHeading());
+
+            // UPDATE RV
+            Vehicle rv = vehicleList.get(1);
+            if (rv.hasCoordinates()) {
+                // set vehicle parameters
+                rv.updateParameters(vp);
+                GeoCoordinates RV_geo = new GeoCoordinates(vp.RV_Lat, vp.RV_Lon);
+                // and update vehicle in the map
+                rv.getMapMarker().setCoordinates(RV_geo);
+                // update heading of the vehicle in the map
+                updatePhotoMapMarker(rv);
+            } else {
+                if(DEBUG) Log.d("updateVehiclePosition", "RV does not have coordinates");
+            }
+            if(DEBUG) Log.d("updateVehiclePosition", "RV updated. lat: " + rv.getLatitude() + " lon:" + rv.getLongitude() + " heading:" + rv.getHeading());
         }
     }
 

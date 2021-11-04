@@ -28,6 +28,7 @@ public class MapViewActivity extends AppCompatActivity {
     private MapViewLite mapView;
     private static List<Vehicle> vehicleList;
     private static VehicleMapMarker vehicleMapMarker;
+    private int numOfHV;
 
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
@@ -44,6 +45,7 @@ public class MapViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         vehicleList = (List<Vehicle>) intent.getSerializableExtra("vehicleList");
+
     }
 
     private void handleAndroidPermissions() {

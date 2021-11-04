@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public class Vehicle implements Serializable {
 
-    private int id;
     private MapMarker mapMarker; // contains lat, lon and alt
     private double heading;
     private double speed;
@@ -37,20 +36,9 @@ public class Vehicle implements Serializable {
         this.speed_conv = speed * 3.6; // m/s to km/h
     }
 
-    public void updateParameters(VehicleParameters vp) {
-        setHeading(vp.heading);
-        setSpeed(vp.speed);
-    }
+    public void updateParameters(VehiclesParameters vp) {}
 
     // default Getters and Setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public MapMarker getMapMarker() {
         return mapMarker;

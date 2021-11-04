@@ -13,28 +13,55 @@ public class RV extends Vehicle {
     rv_rssi = adr_data['RV'][0]['RSSI']
     */
 
-    private int rxcount;
-    private double rssi;
+    private int Id;
+    private int SeqNbr;
+    private int RSSI;
+    private int RxCnt;
 
     public RV() {
         super();
     }
 
-
-
-    public int getRxcount() {
-        return rxcount;
+    @Override
+    public void updateParameters(VehiclesParameters vp) {
+        super.updateParameters(vp);
+        this.Id = vp.RV_Id;
+        this.SeqNbr = vp.RV_SeqNbr;
+        super.setHeading(vp.RV_Heading);
+        super.setSpeed(vp.RV_Speed);
+        this.RSSI = vp.RV_RSSI;
+        this.RxCnt = vp.RV_RxCnt;
     }
 
-    public void setRxcount(int rxcount) {
-        this.rxcount = rxcount;
+    public int getId() {
+        return Id;
     }
 
-    public double getRssi() {
-        return rssi;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public void setRssi(double rssi) {
-        this.rssi = rssi;
+    public int getSeqNbr() {
+        return SeqNbr;
+    }
+
+    public void setSeqNbr(int seqNbr) {
+        SeqNbr = seqNbr;
+    }
+
+    public int getRSSI() {
+        return RSSI;
+    }
+
+    public void setRSSI(int RSSI) {
+        this.RSSI = RSSI;
+    }
+
+    public int getRxCnt() {
+        return RxCnt;
+    }
+
+    public void setRxCnt(int rxCnt) {
+        RxCnt = rxCnt;
     }
 }

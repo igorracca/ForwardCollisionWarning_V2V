@@ -15,6 +15,13 @@ public class HV extends Vehicle {
         super();
     }
 
+    @Override
+    public void updateParameters(VehiclesParameters vp) {
+        super.updateParameters(vp);
+        super.setHeading(vp.HV_Heading);
+        super.setSpeed(vp.HV_Speed);
+    }
+
     // Calculates metric distance from GPS latlon
     public double gpsToDist(double lat2, double lon2) {
         // Approximate radius of earth in km

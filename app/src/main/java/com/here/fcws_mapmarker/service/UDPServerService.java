@@ -43,7 +43,11 @@ public class UDPServerService extends IntentService {
         if (DEBUG) Log.d("UDP Service", "Listening on port " + portNumber + "...");
 
         ResultReceiver rr = intent.getParcelableExtra("receiver");
+        int numOfHV = intent.getIntExtra("numOfHV", 1);
         Bundle b = new Bundle();
+
+        b.putInt("numOfHV", numOfHV);
+        rr.send(DataReceiver.CODE_INIT,b);
 
         byte[] lMsg = new byte[1024];
         DatagramPacket dp = new DatagramPacket(lMsg, lMsg.length);
@@ -52,7 +56,7 @@ public class UDPServerService extends IntentService {
         server_aktiv = true;
         try {
             ds = new DatagramSocket(portNumber);
-//            ds.setReceiveBufferSize(1);
+
             while (server_aktiv) {
                 ds.receive(dp);
 
@@ -65,7 +69,7 @@ public class UDPServerService extends IntentService {
 
                 b.putString("data_rec", rec_str);
 
-                rr.send(DataReceiver.STATUS_RECEIVED,b);
+                rr.send(DataReceiver.CODE_RECEIVED,b);
             }
         } catch(IOException e){
             e.printStackTrace();

@@ -11,9 +11,9 @@ import com.here.fcws_mapmarker.App;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.VehicleMapMarker;
 import com.here.fcws_mapmarker.activities.MainActivity;
-import com.here.fcws_mapmarker.model.Vehicle;
-import com.here.fcws_mapmarker.model.VehicleParameters;
+import com.here.fcws_mapmarker.model.VehiclesParameters;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,10 +22,11 @@ import java.util.Date;
 
 public class DataReceiver extends ResultReceiver {
 
-    public static final int STATUS_RECEIVED = 1;
-    public static final int STATUS_FAILED = 0;
+    public static final int CODE_INIT = 0;
+    public static final int CODE_RECEIVED = 1;
+
     Handler handler;
-    VehicleParameters vp = null;
+    private int numOfRV;
 
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
@@ -36,9 +37,15 @@ public class DataReceiver extends ResultReceiver {
 
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
+        if(resultData != null) {
 
-        if(resultCode == STATUS_RECEIVED) {
-            if(resultData != null) {
+            if(resultCode == CODE_INIT) {
+
+                numOfRV = resultData.getInt("numOfRV");
+
+            } else
+            if(resultCode == CODE_RECEIVED) {
+
                 String data_rec = resultData.getString("data_rec");
 
                 if(DEBUG) Log.d("Data Receiver", "CODE_UPDATE_SERVER_UI: " + data_rec);
@@ -62,7 +69,7 @@ public class DataReceiver extends ResultReceiver {
                     }
                 });
 
-                vp = parseJSON(data_rec);
+                VehiclesParameters vp = parseJSON(data_rec);
 
                 if(DEBUG) Log.d("Data Receiver", "CODE_UPDATE_MAP_UI: " + data_rec);
                 handler.post(new Runnable() {
@@ -78,8 +85,8 @@ public class DataReceiver extends ResultReceiver {
         }
     }
 
-    public VehicleParameters parseJSON (String adr_data) {
-        VehicleParameters vp = null;
+    public VehiclesParameters parseJSON (String adr_data) {
+        VehiclesParameters vp = new VehiclesParameters();
         try {
             JSONObject jObject = new JSONObject(adr_data);
 
@@ -90,31 +97,40 @@ public class DataReceiver extends ResultReceiver {
             if(DEBUG) Log.d("readJSON", "msg read: " + adrclass + " " + ts + " " + time);
 
             if(jObject.getJSONObject("HV") != null) {
-                double lat = jObject.getJSONObject("HV").getDouble("Lat");
-                double lon = jObject.getJSONObject("HV").getDouble("Lon");
-                double elev = jObject.getJSONObject("HV").getDouble("Elev");
-                double heading = jObject.getJSONObject("HV").getDouble("Heading");
-                double speed = jObject.getJSONObject("HV").getDouble("Speed");
+                double HV_Lat = jObject.getJSONObject("HV").getDouble("Lat");
+                double HV_Lon = jObject.getJSONObject("HV").getDouble("Lon");
+                double HV_Elev = jObject.getJSONObject("HV").getDouble("Elev");
+                double HV_Heading = jObject.getJSONObject("HV").getDouble("Heading");
+                double HV_Speed = jObject.getJSONObject("HV").getDouble("Speed");
 
-                if(DEBUG) Log.d("readJSON", "HV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
+                if(DEBUG) Log.d("readJSON", "HV attr: " + HV_Lat + " "+ HV_Lon + " "+ HV_Elev + " "+ HV_Heading + " "+ HV_Speed + " ");
+                vp.setHVParameters(HV_Lat, HV_Lon, HV_Elev, HV_Heading, HV_Speed);
 
-                vp = new VehicleParameters(lat, lon, elev, heading, speed);
+                if(jObject.getJSONArray("RV") != null) {
+                    JSONArray jArray = jObject.getJSONArray("RV");
+                    if(jArray.length() != 0) {
+                        if(DEBUG) Log.d("jArray: ", jArray.toString());
+
+                        int RV_Id = jObject.getJSONArray("RV").getJSONObject(0).getInt("Id");
+                        int RV_SeqNbr = jObject.getJSONArray("RV").getJSONObject(0).getInt("SeqNbr");
+                        double RV_Lat = jObject.getJSONArray("RV").getJSONObject(0).getDouble("Lat");
+                        double RV_Lon = jObject.getJSONArray("RV").getJSONObject(0).getDouble("Lon");
+                        double RV_Elev = jObject.getJSONArray("RV").getJSONObject(0).getDouble("Elev");
+                        double RV_Heading = jObject.getJSONArray("RV").getJSONObject(0).getDouble("Heading");
+                        double RV_Speed = jObject.getJSONArray("RV").getJSONObject(0).getDouble("Speed");
+                        int RV_RSSI = jObject.getJSONArray("RV").getJSONObject(0).getInt("RSSI");
+                        int RV_RxCnt = jObject.getJSONArray("RV").getJSONObject(0).getInt("RxCnt");
+
+                        if(DEBUG) Log.d("readJSON", "RV attr: " + RV_Id + " " + RV_SeqNbr + " " + RV_Lat + " "+ RV_Lon + " "+ RV_Elev + " "+ RV_Heading + " "+ RV_Speed + " " + RV_RSSI + " " + RV_RxCnt + " ");
+                        vp.setRVParameters(RV_Id, RV_SeqNbr, RV_Lat, RV_Lon, RV_Elev, RV_Heading, RV_Speed, RV_RSSI, RV_RxCnt);
+                    }
+                    else {
+                        if(DEBUG) Log.d("readJSON", " RV not found");
+                    }
+                }
             } else {
                 if(DEBUG) Log.d("readJSON", " HV not found");
             }
-//            if(jObject.getJSONArray("RV") != null) {
-//                JSONArray jArray = jObject.getJSONArray("RV");
-//                        if(DEBUG) Log.d("jArray: ", jArray.toString());
-////                double lat = jObject.getJSONArray("RV") .getDouble("Lat");
-////                double lon = jObject.getJSONObject("RV").getDouble("Lon");
-////                double elev = jObject.getJSONObject("RV").getDouble("Elev");
-////                double heading = jObject.getJSONObject("RV").getDouble("Heading");
-////                double speed = jObject.getJSONObject("RV").getDouble("Speed");
-////
-////                if(DEBUG) Log.d("readJSON", "RV attr: " + lat + " "+ lon + " "+ elev + " "+ heading + " "+ speed + " ");
-//            } else {
-//                if(DEBUG) Log.d("readJSON", " RV not found");
-//            }
 
         } catch (JSONException e) {
             if(DEBUG) Log.d("readJSON", " Exception: " + e.getMessage());
