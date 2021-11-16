@@ -44,6 +44,10 @@
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/layout_activity_vehicle_parameters.xml.flat",
+        "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/layout/activity_vehicle_parameters.xml"
+    },
+    {
         "merged": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },

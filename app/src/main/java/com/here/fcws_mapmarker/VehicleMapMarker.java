@@ -24,6 +24,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.model.HV;
 import com.here.fcws_mapmarker.model.RV;
 import com.here.fcws_mapmarker.model.Vehicle;

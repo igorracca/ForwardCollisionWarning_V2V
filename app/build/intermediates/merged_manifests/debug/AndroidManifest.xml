@@ -48,6 +48,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+        <activity
+            android:name="com.here.fcws_mapmarker.activities.VehicleParametersActivity"
+            android:parentActivityName="com.here.fcws_mapmarker.activities.MapViewActivity" >
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MapViewActivity" />
+        </activity>
 
         <service
             android:name="com.here.fcws_mapmarker.service.UDPServerService"

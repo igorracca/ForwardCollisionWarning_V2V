@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- HOST VEHICLE -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="14dp"
+            android:text="HOST VEHICLE" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="14dp"
+            android:text="Latitude:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="14dp"
+            android:text="Longitude:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="14dp"
+            android:text="Elevation:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="14dp"
+            android:text="Heading:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="190dp"
+            android:layout_marginLeft="14dp"
+            android:text="Speed (m/s):" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="220dp"
+            android:layout_marginLeft="14dp"
+            android:text="Speed (km/h):" />
+
+        <TextView
+            android:id="@+id/lbl_hv_lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_hv_lon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_hv_elev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_hv_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_hv_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="190dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_hv_speed_conv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="220dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <!-- REMOTE VEHICLE -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="280dp"
+            android:layout_marginLeft="14dp"
+            android:text="REMOTE VEHICLE" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="325dp"
+            android:layout_marginLeft="14dp"
+            android:text="Id:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="355dp"
+            android:layout_marginLeft="14dp"
+            android:text="Seq Nbr:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="385dp"
+            android:layout_marginLeft="14dp"
+            android:text="Latitude:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="415dp"
+            android:layout_marginLeft="14dp"
+            android:text="Longitude:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="445dp"
+            android:layout_marginLeft="14dp"
+            android:text="Elevation:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="475dp"
+            android:layout_marginLeft="14dp"
+            android:text="Heading:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="505dp"
+            android:layout_marginLeft="14dp"
+            android:text="Speed (m/s):" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="535dp"
+            android:layout_marginLeft="14dp"
+            android:text="Speed (km/h):" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="565dp"
+            android:layout_marginLeft="14dp"
+            android:text="RSSI:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="595dp"
+            android:layout_marginLeft="14dp"
+            android:text="RxCnt:" />
+
+        <TextView
+            android:id="@+id/lbl_rv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="325dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_seq_nr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="355dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="385dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_lon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="415dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_elev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="445dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="475dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="505dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_speed_conv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="535dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_rssi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="565dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lbl_rv_rx_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="595dp"
+            android:layout_marginLeft="150dp"
+            android:text="-" />
+
+" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

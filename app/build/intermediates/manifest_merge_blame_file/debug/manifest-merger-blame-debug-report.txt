@@ -18,7 +18,7 @@
 12-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:6:22-76
 13
 14    <application
-14-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:8:5-41:19
+14-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:8:5-49:19
 15        android:name="com.here.fcws_mapmarker.App"
 15-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:9:9-28
 16        android:allowBackup="true"
@@ -84,23 +84,38 @@
 49                android:value=".activities.MainActivity" />
 49-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:35:17-57
 50        </activity>
-51
-52        <service
-52-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:9-39:44
-53            android:name="com.here.fcws_mapmarker.service.UDPServerService"
-53-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:18-58
-54            android:exported="false" />
-54-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:39:17-41
-55
-56        <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->
-57        <provider
-57-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:17:9-20:40
-58            android:name="com.here.sdk.engine.InitProvider"
-58-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:18:13-60
-59            android:authorities="com.here.fcws_mapmarker.com.here.sdk.engine.InitProvider"
-59-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:19:13-84
-60            android:exported="false" />
-60-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:20:13-37
-61    </application>
-62
-63</manifest>
+51        <activity
+51-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:9-44:20
+52            android:name="com.here.fcws_mapmarker.activities.VehicleParametersActivity"
+52-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:38:19-71
+53            android:parentActivityName="com.here.fcws_mapmarker.activities.MapViewActivity" >
+53-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:39:13-69
+54
+55            <!-- The meta-data tag is required if you support API level 15 and lower -->
+56            <meta-data
+56-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:33:13-35:60
+57                android:name="android.support.PARENT_ACTIVITY"
+57-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:34:17-63
+58                android:value=".activities.MapViewActivity" />
+58-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:35:17-57
+59        </activity>
+60
+61        <service
+61-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:46:9-47:44
+62            android:name="com.here.fcws_mapmarker.service.UDPServerService"
+62-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:46:18-58
+63            android:exported="false" />
+63-->/home/racca/Projects/ForwardCollisionWarning_V2V/app/src/main/AndroidManifest.xml:47:17-41
+64
+65        <!-- ${applicationId} will be replaced to ${applicationId} after the manifest merge. -->
+66        <provider
+66-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:17:9-20:40
+67            android:name="com.here.sdk.engine.InitProvider"
+67-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:18:13-60
+68            android:authorities="com.here.fcws_mapmarker.com.here.sdk.engine.InitProvider"
+68-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:19:13-84
+69            android:exported="false" />
+69-->[heresdk-lite-android-4.5.1.0.3221.aar] /home/racca/.gradle/caches/transforms-2/files-2.1/70afd4aac6e346a52ca52249ab612208/heresdk-lite-android-4.5.1.0.3221/AndroidManifest.xml:20:13-37
+70    </application>
+71
+72</manifest>

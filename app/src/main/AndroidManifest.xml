@@ -35,6 +35,14 @@
                 android:value=".activities.MainActivity" />
         </activity>
 
+        <activity android:name=".activities.VehicleParametersActivity"
+            android:parentActivityName=".activities.MapViewActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MapViewActivity" />
+        </activity>
+
         <service android:name=".service.UDPServerService"
                 android:exported="false" />
 

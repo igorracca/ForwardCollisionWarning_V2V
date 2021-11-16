@@ -8,8 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.here.fcws_mapmarker.App;
-import com.here.fcws_mapmarker.PermissionsRequestor;
+import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.VehicleMapMarker;
 import com.here.fcws_mapmarker.model.Vehicle;
@@ -28,7 +27,6 @@ public class MapViewActivity extends AppCompatActivity {
     private MapViewLite mapView;
     private static List<Vehicle> vehicleList;
     private static VehicleMapMarker vehicleMapMarker;
-    private int numOfHV;
 
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
@@ -86,8 +84,9 @@ public class MapViewActivity extends AppCompatActivity {
         vehicleMapMarker.centerMapView();
     }
 
-    public void clearMapButtonClicked(View view) {
-        vehicleMapMarker.clearMap();
+    public void navigateToVehicleParameters(View view) {
+        Intent i = new Intent(this, VehicleParametersActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -111,7 +110,7 @@ public class MapViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("vehicleList", (Serializable) vehicleMapMarker.getVehicleList());
+        //intent.putExtra("vehicleList", (Serializable) vehicleMapMarker.getVehicleList());
 
         startActivity(intent);
     }

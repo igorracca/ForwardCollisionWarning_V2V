@@ -8,7 +8,7 @@ import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.here.fcws_mapmarker.App;
+import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.model.Vehicle;
 

@@ -28,6 +28,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.here.fcws_mapmarker.PermissionsRequestor;
+
 import java.util.ArrayList;
 
 /**

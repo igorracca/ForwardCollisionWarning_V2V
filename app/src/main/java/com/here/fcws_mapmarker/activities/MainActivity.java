@@ -31,13 +31,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.here.fcws_mapmarker.App;
+import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.model.HV;
 import com.here.fcws_mapmarker.model.RV;
-import com.here.fcws_mapmarker.service.DataReceiver;
-import com.here.fcws_mapmarker.R;
-import com.here.fcws_mapmarker.service.UDPServerService;
 import com.here.fcws_mapmarker.model.Vehicle;
+import com.here.fcws_mapmarker.service.DataReceiver;
+import com.here.fcws_mapmarker.service.UDPServerService;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -7,10 +7,11 @@ import android.os.ResultReceiver;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
-import com.here.fcws_mapmarker.App;
+import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.VehicleMapMarker;
 import com.here.fcws_mapmarker.activities.MainActivity;
+import com.here.fcws_mapmarker.activities.VehicleParametersActivity;
 import com.here.fcws_mapmarker.model.VehiclesParameters;
 
 import org.json.JSONArray;
@@ -78,6 +79,17 @@ public class DataReceiver extends ResultReceiver {
                     public void run() {
                         if(VehicleMapMarker.getVehicleList() != null) {
                             VehicleMapMarker.updateVehicleAttributes(vp);
+                        }
+                    }
+                });
+
+                if(DEBUG) Log.d("Data Receiver", "CODE_VEHICLE_PARAMETERS_UI: " + data_rec);
+                handler.post(new Runnable() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void run() {
+                        if(VehicleParametersActivity.active) {
+                            VehicleParametersActivity.updateVehicleAttributes(vp);
                         }
                     }
                 });
