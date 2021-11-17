@@ -94,13 +94,6 @@ public class VehicleMapMarker {
         }
     }
 
-    public void clearMap() {
-        for (Vehicle v : vehicleList) {
-            mapView.getMapScene().removeMapMarker(v.getMapMarker());
-        }
-        vehicleList.clear();
-    }
-
     private Vehicle getVehicleByMapMarker(MapMarker mapMarker) {
         for (Vehicle v : vehicleList) {
             if(v.getMapMarker() == mapMarker) {
@@ -199,7 +192,7 @@ public class VehicleMapMarker {
                 hv.getMapMarker().setCoordinates(HV_geo);
                 // update heading of the vehicle in the map
                 updatePhotoMapMarker(hv);
-            }else {
+            } else {
                 if(DEBUG) Log.d("updateVehiclePosition", "HV does not have coordinates");
             }
             if(DEBUG) Log.d("updateVehiclePosition", "HV updated. lat: " + hv.getLatitude() + " lon:" + hv.getLongitude() + " heading:" + hv.getHeading());
