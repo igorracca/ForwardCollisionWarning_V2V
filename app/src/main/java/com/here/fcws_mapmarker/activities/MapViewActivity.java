@@ -42,8 +42,9 @@ public class MapViewActivity extends AppCompatActivity {
         handleAndroidPermissions();
 
         Intent intent = getIntent();
-        vehicleList = (List<Vehicle>) intent.getSerializableExtra("vehicleList");
-
+        if(intent.hasExtra("vehicleList")) {
+            vehicleList = (List<Vehicle>) intent.getSerializableExtra("vehicleList");
+        }
     }
 
     private void handleAndroidPermissions() {

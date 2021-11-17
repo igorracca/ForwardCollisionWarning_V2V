@@ -1,6 +1,7 @@
 package com.here.fcws_mapmarker.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.model.Vehicle;
 import com.here.fcws_mapmarker.model.VehiclesParameters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,4 +91,11 @@ public class VehicleParametersActivity extends AppCompatActivity {
 //        labelRVRssi.setText(String.valueOf(vp.RV_RSSI));
 //        labelRVRxCount.setText(String.valueOf(vp.RV_RxCnt));
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MapViewActivity.class);
+        startActivity(intent);
+    }
+
 }
