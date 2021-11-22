@@ -1,6 +1,12 @@
 package com.here.fcws_mapmarker.model;
 
-public class VehiclesParameters {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Parameters implements Serializable {
+
+    public int timestamp;
+    public String time;
 
     public double HV_Lat;
     public double HV_Lon;
@@ -18,7 +24,15 @@ public class VehiclesParameters {
     public int RV_RSSI;
     public int RV_RxCnt;
 
-    public VehiclesParameters(){}
+    public double Dist;
+    public double ttc;
+
+    public Parameters(){}
+
+    public Parameters(int ts, String time) {
+        this.timestamp = ts;
+        this.time = time;
+    }
 
     public void setHVParameters(double HV_lat, double HV_lon, double HV_elev, double HV_heading, double HV_speed) {
         this.HV_Lat = HV_lat;
@@ -38,5 +52,10 @@ public class VehiclesParameters {
         this.RV_Speed = RV_Speed;
         this.RV_RSSI = RV_RSSI;
         this.RV_RxCnt = RV_RxCnt;
+    }
+
+    public void setTtc(double dist, double ttc) {
+        this.Dist = dist;
+        this.ttc = ttc;
     }
 }

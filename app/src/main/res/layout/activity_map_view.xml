@@ -12,6 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="150"
+            android:orientation="horizontal"></LinearLayout>
     </com.here.sdk.mapviewlite.MapViewLite>
 
     <LinearLayout
@@ -44,18 +49,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="100">
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
             android:gravity="center|bottom"
-            android:orientation="vertical"
-            android:padding="4dp"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,28 +64,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#C3C3C3"
+                    android:background="#D6D7D7"
+                    android:layout_marginLeft="5dp"
                     android:text="Distance:" />
 
                 <TextView
+                    android:id="@+id/lbl_dist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#C3C3C3"
+                    android:layout_weight="3"
+                    android:background="#D6D7D7"
                     android:text="-" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#C3C3C3"
+                    android:background="#D6D7D7"
+                    android:layout_marginLeft="5dp"
                     android:text="Time to collision:" />
 
                 <TextView
+                    android:id="@+id/lbl_ttc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#C3C3C3"
+                    android:layout_weight="3"
+                    android:layout_marginRight="5dp"
+                    android:background="#D6D7D7"
                     android:text="-" />
 
             </LinearLayout>
@@ -99,8 +101,9 @@
                 android:layout_gravity="center"
                 android:background="#4CAF50"
                 android:text="WARNING LEVEL"
+                android:layout_margin="5dp"
                 android:textAlignment="center" />
-            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

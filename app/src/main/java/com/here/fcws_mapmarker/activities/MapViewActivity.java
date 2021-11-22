@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.R;
@@ -28,7 +29,11 @@ public class MapViewActivity extends AppCompatActivity {
     private static List<Vehicle> vehicleList;
     private static VehicleMapMarker vehicleMapMarker;
 
+    private static TextView textViewDist;
+    private static TextView textViewTtc;
+
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
+    public static boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +44,16 @@ public class MapViewActivity extends AppCompatActivity {
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
 
+        textViewDist = (TextView) findViewById(R.id.lbl_dist);
+        textViewTtc = (TextView) findViewById(R.id.lbl_ttc);
+
         handleAndroidPermissions();
 
         Intent intent = getIntent();
         if(intent.hasExtra("vehicleList")) {
             vehicleList = (List<Vehicle>) intent.getSerializableExtra("vehicleList");
         }
+        active = true;
     }
 
     private void handleAndroidPermissions() {
@@ -79,6 +88,11 @@ public class MapViewActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static void updateTtc(double dist, double ttc) {
+        textViewDist.setText(String.format("%.2f", dist));
+        textViewTtc.setText(String.format("%.2f", ttc));
     }
 
     public void centerMapViewButtonClicked(View view) {

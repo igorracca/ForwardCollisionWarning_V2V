@@ -10,9 +10,8 @@ import android.widget.TextView;
 
 import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.model.Vehicle;
-import com.here.fcws_mapmarker.model.VehiclesParameters;
+import com.here.fcws_mapmarker.model.Parameters;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class VehicleParametersActivity extends AppCompatActivity {
         active = true;
     }
 
-    public static void updateVehicleAttributes(VehiclesParameters vp) {
+    public static void updateVehicleAttributes(Parameters vp) {
         labelHVLat.setText(String.valueOf(vp.HV_Lat));
         labelHVLon.setText(String.valueOf(vp.HV_Lon));
         labelHVElev.setText(String.valueOf(vp.HV_Elev));

@@ -725,6 +725,7 @@ id image
 id info
 id invisible
 id italic
+id lbl_dist
 id lbl_hv_elev
 id lbl_hv_heading
 id lbl_hv_lat
@@ -741,6 +742,7 @@ id lbl_rv_rx_cnt
 id lbl_rv_seq_nr
 id lbl_rv_speed
 id lbl_rv_speed_conv
+id lbl_ttc
 id left
 id line1
 id line3
@@ -906,6 +908,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
 string debug_mode
+string log_mode
 string search_menu_title
 string status_bar_notification_info_overflow
 style AlertDialog_AppCompat

@@ -24,12 +24,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
-import com.here.fcws_mapmarker.R;
 import com.here.fcws_mapmarker.model.HV;
 import com.here.fcws_mapmarker.model.RV;
 import com.here.fcws_mapmarker.model.Vehicle;
-import com.here.fcws_mapmarker.model.VehiclesParameters;
-import com.here.sdk.core.Anchor2D;
+import com.here.fcws_mapmarker.model.Parameters;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Metadata;
 import com.here.sdk.core.Point2D;
@@ -55,6 +53,9 @@ public class VehicleMapMarker {
     Camera camera = null;
 
     public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
+    public static final int NORMAL_AWARENESS = 2;
+    public static final int WARNING = 1;
+    public static final int PRE_CRASH = 0;
 
     public VehicleMapMarker(Context context, MapViewLite mapView, List<Vehicle> vehicleList) {
         this.context = context;
@@ -178,7 +179,7 @@ public class VehicleMapMarker {
         mapMarker.updateImageStyle(imgStyle);
     }
 
-    public static void updateVehicleAttributes(VehiclesParameters vp) {
+    public static void updateVehicleAttributes(Parameters vp) {
         if(vehicleList.size() == 0) {
             if(DEBUG) Log.d("updateVehiclePosition", "vehicle list empty");
         } else {
@@ -212,6 +213,48 @@ public class VehicleMapMarker {
             }
             if(DEBUG) Log.d("updateVehiclePosition", "RV updated. lat: " + rv.getLatitude() + " lon:" + rv.getLongitude() + " heading:" + rv.getHeading());
         }
+    }
+
+    // Calculates metric distance from GPS latlon
+    public static double gpsToDist(double lat1, double lon1, double lat2, double lon2) {
+        // Approximate radius of earth in km
+        double R = 6373.0;
+
+        lat1 = Math.toRadians(lat1);
+        lon1 = Math.toRadians(lon1);
+        lat2 = Math.toRadians(lat2);
+        lon2 = Math.toRadians(lon2);
+
+        double dlon = lon2 - lon1;
+        double dlat = lat2 - lat1;
+
+        double a = Math.pow( Math.sin(dlat/2) , 2 ) +
+                Math.cos(lat1) * Math.cos(lat2) *
+                        Math.pow( Math.sin(dlon/2), 2);
+
+        double c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) );
+
+        double distance = (R * c) * 1000;
+
+        return distance;
+    }
+
+    // Calculates actual TTC (Time to collision)
+    public static double ttc(double distancevv, double speed1, double speed2) {
+        double v_delta = Math.abs(speed1 - speed2);
+        double ttc = 0;
+
+        if(v_delta != 0) {
+            ttc = distancevv / v_delta;
+        } else {
+            ttc = distancevv;
+        }
+        return ttc;
+        // ?? distvv = floor(distanceVV / 10)
+    }
+
+    public int FWC(double ttc, double speed1, double speed2) {
+        return 0;
     }
 
     private void showDialog(String title, String message) {

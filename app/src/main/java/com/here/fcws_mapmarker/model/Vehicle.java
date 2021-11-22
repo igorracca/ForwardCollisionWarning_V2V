@@ -36,7 +36,7 @@ public class Vehicle implements Serializable {
         this.speed_conv = speed * 3.6; // m/s to km/h
     }
 
-    public void updateParameters(VehiclesParameters vp) {}
+    public void updateParameters(Parameters vp) {}
 
     // default Getters and Setters
 

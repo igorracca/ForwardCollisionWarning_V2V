@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     private int portNumber = 15000;
     private static List<Vehicle> vehicleList = new ArrayList<>();
-    private int numOfRV = 2;
 
     private Button buttonStartReceiving;
     private Button buttonStopReceiving;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private static TextView textViewDataFromClient;
 
     public static int textView_msgCounter = 0;
-    public static final int textView_msgLimit = 30;
+    public static final int textView_msgLimit = 100;
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
 
     @Override
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, UDPServerService.class);
         intent.putExtra("portNumber", portNumber);
-        intent.putExtra("numOfRV", numOfRV);
         ResultReceiver dataReceiver = new DataReceiver(handler);
         intent.putExtra("receiver", dataReceiver);
 
@@ -114,9 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initVehicleList() {
         vehicleList.add(new HV());
-        for(int i=1; i<=numOfRV; i++) {
-            vehicleList.add(new RV());
-        }
+        vehicleList.add(new RV());
     }
 
     public void clearTextViewButtonClicked(View v) {

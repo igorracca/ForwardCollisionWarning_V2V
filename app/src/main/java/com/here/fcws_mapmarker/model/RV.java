@@ -23,7 +23,7 @@ public class RV extends Vehicle {
     }
 
     @Override
-    public void updateParameters(VehiclesParameters vp) {
+    public void updateParameters(Parameters vp) {
         super.updateParameters(vp);
         this.Id = vp.RV_Id;
         this.SeqNbr = vp.RV_SeqNbr;
