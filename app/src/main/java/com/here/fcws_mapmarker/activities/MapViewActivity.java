@@ -1,9 +1,12 @@
 package com.here.fcws_mapmarker.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,10 +23,16 @@ import com.here.sdk.mapviewlite.MapViewLite;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.here.fcws_mapmarker.VehicleMapMarker.AWARENESS;
+import static com.here.fcws_mapmarker.VehicleMapMarker.NORMAL;
+import static com.here.fcws_mapmarker.VehicleMapMarker.PRE_CRASH;
+import static com.here.fcws_mapmarker.VehicleMapMarker.WARNING;
+
 public class MapViewActivity extends AppCompatActivity {
 
     private static final String TAG = MapViewActivity.class.getSimpleName();
 
+    private Context context;
     private PermissionsRequestor permissionsRequestor;
     private MapViewLite mapView;
     private static List<Vehicle> vehicleList;
@@ -31,6 +40,7 @@ public class MapViewActivity extends AppCompatActivity {
 
     private static TextView textViewDist;
     private static TextView textViewTtc;
+    private static TextView textViewLevel;
 
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
     public static boolean active = false;
@@ -46,6 +56,7 @@ public class MapViewActivity extends AppCompatActivity {
 
         textViewDist = (TextView) findViewById(R.id.lbl_dist);
         textViewTtc = (TextView) findViewById(R.id.lbl_ttc);
+        textViewLevel = (TextView) findViewById(R.id.lbl_level);
 
         handleAndroidPermissions();
 
@@ -95,6 +106,27 @@ public class MapViewActivity extends AppCompatActivity {
         textViewTtc.setText(String.format("%.2f", ttc));
     }
 
+    public static void updatePriorityLevel(int level) {
+        switch(level) {
+            case NORMAL:
+                textViewLevel.setText("NORMAL");
+                textViewLevel.setBackgroundColor(Color.parseColor("#d6d7d7"));
+                break;
+            case AWARENESS:
+                textViewLevel.setText("AWARENESS");
+                textViewLevel.setBackgroundColor(Color.parseColor("#a3e4d7"));
+                break;
+            case WARNING:
+                textViewLevel.setText("WARNING");
+                textViewLevel.setBackgroundColor(Color.parseColor("#f7dc6f"));
+                break;
+            case PRE_CRASH:
+                textViewLevel.setText("PRE_CRASH");
+                textViewLevel.setBackgroundColor(Color.parseColor("#922b21"));
+                break;
+        }
+    }
+
     public void centerMapViewButtonClicked(View view) {
         vehicleMapMarker.centerMapView();
     }
@@ -125,8 +157,6 @@ public class MapViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra("vehicleList", (Serializable) vehicleMapMarker.getVehicleList());
-
         startActivity(intent);
     }
 

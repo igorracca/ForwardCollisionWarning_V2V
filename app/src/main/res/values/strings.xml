@@ -2,4 +2,8 @@
     <string name="app_name">V2V HMI</string>
     <string name="debug_mode">true</string>
     <string name="log_mode">true</string>
+    <string name="MLT">300</string>
+    <string name="ttc_awareness">5000</string>
+    <string name="ttc_warning">2000</string>
+    <string name="ttc_pre_crash">1000</string>
 </resources>

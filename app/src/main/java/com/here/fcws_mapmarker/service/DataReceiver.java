@@ -76,13 +76,15 @@ public class DataReceiver extends ResultReceiver {
                             if(VehicleMapMarker.getVehicleList() != null) {
                                 double dist = VehicleMapMarker.gpsToDist(vp.HV_Lat, vp.HV_Lon, vp.RV_Lat, vp.RV_Lon);
                                 double ttc = VehicleMapMarker.ttc(dist, vp.HV_Speed, vp.RV_Speed);
+                                int priorityLevel = VehicleMapMarker.FWC(ttc, vp.HV_Speed, vp.RV_Speed);
 
-                                VehicleMapMarker.updateVehicleAttributes(vp);
                                 MapViewActivity.updateTtc(dist, ttc);
+                                MapViewActivity.updatePriorityLevel(priorityLevel);
+
                                 vp.setTtc(dist, ttc);
+                                VehicleMapMarker.updateVehicleAttributes(vp);
                             }
                         }
-
                     }
                 });
 

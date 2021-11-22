@@ -732,6 +732,7 @@ id lbl_hv_lat
 id lbl_hv_lon
 id lbl_hv_speed
 id lbl_hv_speed_conv
+id lbl_level
 id lbl_rv_elev
 id lbl_rv_heading
 id lbl_rv_id
@@ -867,6 +868,7 @@ layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_round
+string MLT
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -911,6 +913,9 @@ string debug_mode
 string log_mode
 string search_menu_title
 string status_bar_notification_info_overflow
+string ttc_awareness
+string ttc_pre_crash
+string ttc_warning
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
