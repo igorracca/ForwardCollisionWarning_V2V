@@ -56,7 +56,6 @@ public class VehicleMapMarker {
     public static final int WARNING = 1;
     public static final int PRE_CRASH = 0;
     public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
-    public static final double ttc_awareness = Double.parseDouble(App.getRes().getString(R.string.ttc_awareness));
     public static final double ttc_warning = Double.parseDouble(App.getRes().getString(R.string.ttc_warning));
     public static final double ttc_pre_crash = Double.parseDouble(App.getRes().getString(R.string.ttc_pre_crash));
 

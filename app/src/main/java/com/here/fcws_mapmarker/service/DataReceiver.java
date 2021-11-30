@@ -83,8 +83,7 @@ public class DataReceiver extends ResultReceiver {
                                 priorityLevel = VehicleMapMarker.FWC(ttc, vp.HV_Speed, vp.RV_Speed);
 
                                 MapViewActivity.updateTtc(dist, ttc);
-                                MapViewActivity.updatePriorityLevel(priorityLevel);
-
+                                MapViewActivity.updatePriorityLevel(priorityLevel, App.getAppContext());
                                 vp.setTtc(dist, ttc);
                                 VehicleMapMarker.updateVehicleAttributes(vp);
                             }

@@ -9,8 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.R;
@@ -29,13 +31,13 @@ import static com.here.fcws_mapmarker.VehicleMapMarker.WARNING;
 
 public class MapViewActivity extends AppCompatActivity {
 
-    private static final String TAG = MapViewActivity.class.getSimpleName();
+    private final String TAG = MapViewActivity.class.getSimpleName();
 
     private Context context;
     private PermissionsRequestor permissionsRequestor;
     private MapViewLite mapView;
-    private static List<Vehicle> vehicleList;
-    private static VehicleMapMarker vehicleMapMarker;
+    private List<Vehicle> vehicleList;
+    private VehicleMapMarker vehicleMapMarker;
 
     private static TextView textViewDist;
     private static TextView textViewTtc;
@@ -47,6 +49,7 @@ public class MapViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.context = MapViewActivity.this;
         setContentView(R.layout.activity_map_view);
 
         // Get a MapView instance from layout
@@ -105,20 +108,22 @@ public class MapViewActivity extends AppCompatActivity {
         textViewTtc.setText(String.format("%.2f", ttc));
     }
 
-    public static void updatePriorityLevel(int level) {
+    public static void updatePriorityLevel(int level, Context context) {
         switch(level) {
             case NORMAL_AWARENESS:
                 textViewLevel.setText("NORMAL/AWARENESS");
                 textViewLevel.setBackgroundColor(Color.parseColor("#a3e4d7"));
-                break;
+            break;
             case WARNING:
                 textViewLevel.setText("WARNING");
                 textViewLevel.setBackgroundColor(Color.parseColor("#f7dc6f"));
-                break;
+                showWarningMessage(WARNING, context);
+            break;
             case PRE_CRASH:
                 textViewLevel.setText("PRE_CRASH");
                 textViewLevel.setBackgroundColor(Color.parseColor("#922b21"));
-                break;
+//                showWarningMessage(PRE_CRASH, context);
+            break;
         }
     }
 
@@ -129,6 +134,28 @@ public class MapViewActivity extends AppCompatActivity {
     public void navigateToVehicleParameters(View view) {
         Intent i = new Intent(this, VehicleParametersActivity.class);
         startActivity(i);
+    }
+
+    public static void showWarningMessage(int priority_level, Context context) {
+        String message = "";
+        String color = "#f7dc6f";
+        switch(priority_level) {
+            case WARNING:
+                message = "WARNING";
+                color = "#f7dc6f";
+            break;
+            case PRE_CRASH:
+                message = "PRE-CRASH";
+                color = "#922b21";
+                break;
+        }
+
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.setBackgroundColor(Color.parseColor(color));
+        toast.setGravity(Gravity.TOP, 0, 300);
+        toast.set
+        toast.show();
     }
 
     @Override
