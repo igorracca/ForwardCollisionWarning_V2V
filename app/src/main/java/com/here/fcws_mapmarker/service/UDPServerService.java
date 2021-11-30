@@ -4,6 +4,8 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -11,8 +13,11 @@ import android.util.Log;
 
 import com.here.fcws_mapmarker.*;
 import com.here.fcws_mapmarker.R;
+import com.here.fcws_mapmarker.model.CSVwriterParcelable;
 import com.here.fcws_mapmarker.model.Parameters;
 import com.opencsv.CSVWriter;
+
+import net.time4j.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +29,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class UDPServerService extends IntentService {
@@ -32,6 +40,7 @@ public class UDPServerService extends IntentService {
     private static File file = null;
     private CSVWriter writer = null;
     private static boolean server_aktiv = true;
+
     public final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
     public final boolean LOG = Boolean.parseBoolean(App.getRes().getString(R.string.log_mode));
 
@@ -51,10 +60,9 @@ public class UDPServerService extends IntentService {
 
             String baseDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
             String fileName = "ADR_" + String.valueOf(instant);
-            String filePath = baseDir + "/log" + File.separator + fileName;
+            String filePath = baseDir + "/log/HMI" + File.separator + fileName;
             if (DEBUG) Log.d("CSV", "FileName: " + fileName + " filePath: " + filePath);
             file = new File(filePath);
-
             try{
                 // File exist
                 if(file.exists()&&!file.isDirectory()) {
@@ -69,13 +77,14 @@ public class UDPServerService extends IntentService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String[] data = {"Timestamp", "Time", "HV_Lat", "HV_Lon", "HV_Elev", "HV_Heading", "HV_Speed",
+            String[] data = {"Time_received", "Timestamp", "Time", "HV_Lat", "HV_Lon", "HV_Elev", "HV_Heading", "HV_Speed",
                                 "Id", "SeqNbr", "RV_Lat", "RV_Lon", "RV_Elev", "RV_Heading", "RV_Speed", "RV_RSSI", "RV_RxCnt",
-                                "Distance", "Time to collision"};
+                                "Distance", "Time to collision", "Priority_level"};
             writer.writeNext(data);
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         int portNumber = intent.getIntExtra("portNumber", 0);
@@ -91,7 +100,6 @@ public class UDPServerService extends IntentService {
         server_aktiv = true;
         try {
             ds = new DatagramSocket(portNumber);
-//            ds.setReceiveBufferSize(1);
             if (DEBUG) Log.d("UDP Service", "S: Receiving...listening on port " + dp.getPort());
 
             while (server_aktiv) {
@@ -103,16 +111,22 @@ public class UDPServerService extends IntentService {
                 if (DEBUG) Log.d("UDP Service", "packet length: " + Integer.toString(dp.getLength()));
                 if (DEBUG) Log.d("UDP Service", "packet data: " + rec_str);
 
+                Date d = new Date();
+                Instant instant = d.toInstant();
+
                 Parameters vp = parseJSON(rec_str);
                 b.putSerializable("data_rec", (Serializable) vp);
                 b.putString("data_rec_str", rec_str);
 
-                rr.send(DataReceiver.CODE_RECEIVED,b);
+                CSVwriterParcelable parcWriter = new CSVwriterParcelable(writer);
+                b.putSerializable("file_writer",parcWriter);
+                b.putString("instant_rec", String.valueOf(instant));
 
-                if (LOG) if(!rec_str.equals("")) {
-                    writeCSV(vp);
-                }
-//                Thread.sleep(300);
+//                Moment m2004 = PlainTimestamp.of(2004, 1, 1, 0, 0).atUTC();
+//                Moment now = SystemClock.currentMoment(); // other clocks based on NTP are possible
+//                long seconds = SI.SECONDS.between(m2004, now);
+
+                rr.send(DataReceiver.CODE_RECEIVED,b);
             }
         } catch(IOException e){
             e.printStackTrace();
@@ -191,30 +205,5 @@ public class UDPServerService extends IntentService {
             e.printStackTrace();
         }
         return vp;
-    }
-
-    public void writeCSV(Parameters vp) {
-        String[] data = {
-                    String.valueOf(vp.timestamp),
-                    String.valueOf(vp.time),
-                    String.valueOf(vp.HV_Lat),
-                    String.valueOf(vp.HV_Lon),
-                    String.valueOf(vp.HV_Elev),
-                    String.valueOf(vp.HV_Heading),
-                    String.valueOf(vp.HV_Speed),
-                    String.valueOf(vp.RV_Id),
-                    String.valueOf(vp.RV_SeqNbr),
-                    String.valueOf(vp.RV_Lat),
-                    String.valueOf(vp.RV_Lon),
-                    String.valueOf(vp.RV_Elev),
-                    String.valueOf(vp.RV_Heading),
-                    String.valueOf(vp.RV_Speed),
-                    String.valueOf(vp.RV_RSSI),
-                    String.valueOf(vp.RV_RxCnt),
-                    String.valueOf(vp.Dist),
-                    String.valueOf(vp.ttc)
-        };
-        writer.writeNext(data);
-        if (DEBUG) Log.d("CSV", "CSV data written.");
     }
 }

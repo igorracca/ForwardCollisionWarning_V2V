@@ -23,8 +23,7 @@ import com.here.sdk.mapviewlite.MapViewLite;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.here.fcws_mapmarker.VehicleMapMarker.AWARENESS;
-import static com.here.fcws_mapmarker.VehicleMapMarker.NORMAL;
+import static com.here.fcws_mapmarker.VehicleMapMarker.NORMAL_AWARENESS;
 import static com.here.fcws_mapmarker.VehicleMapMarker.PRE_CRASH;
 import static com.here.fcws_mapmarker.VehicleMapMarker.WARNING;
 
@@ -108,12 +107,8 @@ public class MapViewActivity extends AppCompatActivity {
 
     public static void updatePriorityLevel(int level) {
         switch(level) {
-            case NORMAL:
-                textViewLevel.setText("NORMAL");
-                textViewLevel.setBackgroundColor(Color.parseColor("#d6d7d7"));
-                break;
-            case AWARENESS:
-                textViewLevel.setText("AWARENESS");
+            case NORMAL_AWARENESS:
+                textViewLevel.setText("NORMAL/AWARENESS");
                 textViewLevel.setBackgroundColor(Color.parseColor("#a3e4d7"));
                 break;
             case WARNING:

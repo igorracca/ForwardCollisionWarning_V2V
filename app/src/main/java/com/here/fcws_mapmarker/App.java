@@ -3,6 +3,8 @@ package com.here.fcws_mapmarker;
 import android.app.Application;
 import android.content.res.Resources;
 
+import net.time4j.android.ApplicationStarter;
+
 public class App extends Application {
     private static App mInstance;
     private static Resources res;
@@ -12,6 +14,7 @@ public class App extends Application {
         super.onCreate();
         mInstance = this;
         res = getResources();
+        ApplicationStarter.initialize(this, true);
     }
 
     public static App getInstance() {

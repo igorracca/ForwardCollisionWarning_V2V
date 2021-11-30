@@ -52,8 +52,7 @@ public class VehicleMapMarker {
 
     Camera camera = null;
 
-    public static final int NORMAL = 3;
-    public static final int AWARENESS = 2;
+    public static final int NORMAL_AWARENESS = 2;
     public static final int WARNING = 1;
     public static final int PRE_CRASH = 0;
     public static final boolean DEBUG = Boolean.parseBoolean(App.getRes().getString(R.string.debug_mode));
@@ -179,7 +178,8 @@ public class VehicleMapMarker {
         MapMarker mapMarker = v.getMapMarker();
 
         MapMarkerImageStyle imgStyle = new MapMarkerImageStyle();
-        imgStyle.setAngle((float) v.getHeading() + 270); // map default orientation
+        // map default orientation
+        imgStyle.setAngle((float) v.getHeading() + 270);
         mapMarker.updateImageStyle(imgStyle);
     }
 
@@ -260,17 +260,13 @@ public class VehicleMapMarker {
     public static int FWC(double ttc, double speed1, double speed2) {
         ttc = ttc * 1000;
         if(speed1 > speed2) {
-            if(ttc <= ttc_pre_crash) {
+            if (ttc <= ttc_pre_crash) {
                 return PRE_CRASH;
-            } else
-            if(ttc <= ttc_warning) {
+            } else if (ttc <= ttc_warning) {
                 return WARNING;
-            } else
-            if(ttc <= ttc_awareness) {
-                return AWARENESS;
             }
         }
-        return NORMAL;
+        return NORMAL_AWARENESS;
     }
 
     private void showDialog(String title, String message) {

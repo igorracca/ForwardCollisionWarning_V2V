@@ -27,13 +27,22 @@
             android:layout_marginTop="68dp"
             android:text="STOP Receiving data" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="130dp"
+            android:onClick="clearTextViewButtonClicked"
+            android:text="Max. latency: 300 ms" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/btn_stop_receiving"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="35dp">
+            android:layout_marginTop="60dp">
 
             <TextView
                 android:id="@+id/tv_data_from_server"
@@ -61,6 +70,33 @@
             android:layout_marginEnd="3dp"
             android:onClick="navigateToMapView"
             android:text="Map View" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:layout_marginStart="3dp"
+                android:text="Latency: " />
+
+            <TextView
+                android:id="@+id/lbl_latency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="150dp"
+                android:text="-" />
+        >
+
+        </LinearLayout>
+
+
+
 " />
 
     </RelativeLayout>

@@ -732,6 +732,7 @@ id lbl_hv_lat
 id lbl_hv_lon
 id lbl_hv_speed
 id lbl_hv_speed_conv
+id lbl_latency
 id lbl_level
 id lbl_rv_elev
 id lbl_rv_heading

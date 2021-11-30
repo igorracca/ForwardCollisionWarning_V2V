@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonStopReceiving;
     private Button buttonClear;
     private static TextView textViewDataFromClient;
+    private static TextView textViewLatency;
 
     public static int textView_msgCounter = 0;
     public static final int textView_msgLimit = 100;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         buttonStartReceiving = (Button) findViewById(R.id.btn_start_receiving);
         buttonStopReceiving = (Button) findViewById(R.id.btn_stop_receiving);
         textViewDataFromClient = (TextView) findViewById(R.id.tv_data_from_server);
+        textViewLatency = (TextView) findViewById(R.id.lbl_latency);
         buttonClear = (Button) findViewById(R.id.btn_clear);
 
         buttonClear.setEnabled(false);
@@ -108,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static TextView getTextViewDataFromClient() {
         return textViewDataFromClient;
+    }
+
+    private static void updateLatency(int latency) {
+        textViewLatency.setText(latency + " ms");
     }
 
     private void initVehicleList() {
